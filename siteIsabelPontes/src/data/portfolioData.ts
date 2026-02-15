@@ -1,151 +1,93 @@
 import type { PortfolioProject } from '@/types/portfolio';
 
-import type { partner } from '@/types/partner';
-
-import type { Photoshoot } from '@/types/photoshoot';
-import { slugify } from '@/utils/slugify';
-
-const rawPartners: any = {
-  milena: {
-    name: 'Milena Silva',
-    image: '/cards/Milena.jpg',
-    role: 'model',
-    instagram: '@milenasilvaa',
-  },
-  // outros...
-};
-
-// ✅ Seus dados “preenchíveis” (sem id)
-const rawPortfolio: PortfolioProjectInput[] = [
+export const portfolioProjects: PortfolioProject[] = [
   {
+    id: 'afrodite',
     title: 'Afrodite',
-    description: 'Uma exploração artística dos arquétipos femininos modernos',
-    category: 'editorial',
-    image: '/Projetos/afrodite/capa/Milena.jpg',
-    photoshoots: [
-      {
-        title: 'Ensaio Afrodite - Parte 1',
-        description:
-          'Primeiras imagens da série Afrodite com foco em graça e poder feminino',
-        concept: 'Deusa mitológica na modernidade',
-        date: '2024-01-10',
-        location: 'Curitiba, PR',
-
-        images: [
-          '/Projetos/afrodite/ensaios/ensaio1/Milena.jpg',
-          '/Projetos/afrodite/ensaios/ensaio1/Milena.jpg',
-          '/Projetos/afrodite/ensaios/ensaio1/Milena.jpg',
-        ],
-        models: ['Milena Silva'],
-        helpers: [
-          {
-            name: 'Ana Costa',
-            role: 'makeup',
-            image: '/cards/Director.jpg',
-            instagram: '@anacostamakeup',
-          },
-          {
-            name: 'Lucas Ferreira',
-            role: 'assistant',
-            image: '/cards/Director.jpg',
-          },
-        ],
-        featured: true,
-      },
-      {
-        title: 'Ensaio Afrodite - Parte 2',
-        description:
-          'Segundas imagens da série Afrodite com foco em graça e poder feminino',
-        concept: 'Deusa mitológica na modernidade',
-        date: '2024-01-15',
-        location: 'Curitiba, PR',
-        images: [
-          '/Projetos/afrodite/ensaios/ensaio2/tally.jpg',
-          '/Projetos/afrodite/ensaios/ensaio2/isa.jpg',
-          '/Projetos/afrodite/ensaios/ensaio2/tally.jpg',
-        ],
-        models: [
-          {
-            name: 'Milena Silva',
-            role: 'model',
-            image: '/cards/Milena.jpg',
-            instagram: '@milenasilvaa',
-            portfolio: 'https://portfolio.com/milena',
-          },
-        ],
-        helpers: [
-          {
-            name: 'Ana Costa',
-            role: 'makeup',
-            image: '/cards/Director.jpg',
-            instagram: '@anacostamakeup',
-          },
-          {
-            name: 'Lucas Ferreira',
-            role: 'assistant',
-            image: '/cards/Director.jpg',
-          },
-        ],
-        featured: false,
-      },
-    ],
-  },
-  {
-    title: 'Renascentistas',
     description:
-      'Projetos voltados para a expressão e contemplação do tema renscentista glorificando a beleza feminina em suas diversas formas.',
-    category: 'Ensaios',
-    image: '/Projetos/renascentista/capa/Anna_Julia.png',
-    photoshoots: [
-      {
-        title: 'Ensaio Independente - Parte 1',
-        description:
-          'Exploração de temas pessoais e estéticos sem briefing comercial.',
-        concept: 'Liberdade criativa total',
-        date: '2024-03-15',
-        location: 'Manaus, AM',
-        images: [
-          '/cards/Director.jpg',
-          '/cards/Director.jpg',
-          '/cards/Director.jpg',
-          '/cards/Director.jpg',
-        ],
-        models: [
-          {
-            name: 'Carlos Silva',
-            role: 'model',
-            image: '/cards/Director.jpg',
-            instagram: '@carlossilva',
-          },
-        ],
-        helpers: [],
-        featured: false,
-      },
-    ],
-  },
-  {
-    title: 'Temáticos',
-    description:
-      'Conjunto de ensaios tematicos baseados em conceitos e inspirações pessoais das modelos e/ou da produção',
+      'Projeto editorial inspirado na mitologia grega, explorando a beleza e a força feminina através de imagens poderosas e conceituais.',
     category: 'conceitual',
-    image: '/Projetos/tematicos/capa/keshy.png',
-    photoshoots: [],
+    image: '/portfolio/afrodite/cover.jpg',
+    photoshoots: [
+      'afrodite-andressa',
+      'afrodite-isabel',
+      'afrodite-mika',
+      'afrodite-milena',
+      'afrodite-paty_anie',
+      'afrodite-tally',
+    ],
+  },
+  {
+    id: 'epoca',
+    title: 'Época',
+    description:
+      'Projeto editorial para a revista Época, destacando tendências de moda e estilo de vida, com uma abordagem contemporânea e sofisticada.',
+    category: 'editorial',
+    image: '/portfolio/epoca/cover.jpg',
+    photoshoots: [
+      'epoca-andressa',
+      'epoca-Anna_Julia',
+      'epoca-GLAUCIA_OLLIE',
+      'epoca-Bruna_Camargo',
+      'epoca-Hayanna',
+      'epoca-Heidi',
+      'epoca-jessica',
+      'epoca-Paloma',
+    ],
+  },
+  {
+    id: 'eventos',
+    title: 'Eventos',
+    description:
+      'Cobertura fotográfica de eventos, capturando momentos únicos e a atmosfera vibrante das pessoas e do festival.',
+    category: 'direção-criativa',
+    image: '/portfolio/eventos/cover.jpg',
+    photoshoots: [
+      'eventos-jheni_e_a_cobra',
+      'eventos-isabel',
+      'eventos-mika',
+      'eventos-milena',
+      'eventos-paty_anie',
+      'eventos-tally',
+    ],
+  },
+  {
+    id: 'musa_day',
+    title: 'Musa Day',
+    description:
+      'Projeto feminino voltado para reunir mulheres inspiradoras e criativas, celebrando a diversidade e a força feminina através de fotos e histórias envolventes.',
+    category: 'direção-criativa',
+    image: '/portfolio/musa_day/cover.jpg',
+    photoshoots: [
+      'musa_day-Andressa_e_a_cobra',
+      'musa_day-Daiara',
+      'musa_day-Monica_e_a_coruja',
+      'musa_day-nadia_e_a_cobra',
+    ],
+  },
+  {
+    id: 'ensaios_externos',
+    title: 'Ensaios Externos',
+    description:
+      'Série de ensaios fotográficos realizados em locações externas, explorando diferentes ambientes e estilos de iluminação.',
+    category: 'editorial',
+    image: '/portfolio/ensaios_externos/cover.jpg',
+    photoshoots: ['ensaios_externos-MUSAS MÍSTICAS ENSAIO EXTERNO'],
+  },
+  {
+    id: 'personalizados',
+    title: 'Personalizados',
+    description:
+      'Projetos personalizados para clientes, adaptando o estilo e a abordagem fotográfica às necessidades e preferências individuais.',
+    category: 'independentes',
+    image: '/portfolio/personalizados/cover.jpg',
+    photoshoots: [
+      'personalizados-jaci',
+      'personalizados-keshy',
+      'personalizados-Nadia_Lobkov1',
+      'personalizados-Nadia_Lobkov2',
+      'personalizados-Lara',
+      'personalizados-Monica',
+    ],
   },
 ];
-
-// export const portfolioProjects: PortfolioProject[] = rawPortfolio.map(
-//   (project) => {
-//     const projectId = slugify(project.title);
-
-//     return {
-//       ...project,
-//       id: projectId,
-//       photoshoots: project.photoshoots.map((shoot, i) => ({
-//         ...shoot,
-//         id: shootId(project.title, shoot.title, i),
-//         models: shoot.models.map((m) => ({ ...m, id: memberId(m) })),
-//         helpers: shoot.helpers.map((h) => ({ ...h, id: memberId(h) })),
-//       })),
-//     };
-//   },
-// );

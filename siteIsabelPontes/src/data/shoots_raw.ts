@@ -27,7 +27,7 @@ export default function photoshoots(): Projects[] {
           ? fileName.slice(1)
           : fileName;
 
-        return `${BASE}/ensaios/${projectName}/${shootName}/${normalized}`;
+        return `${BASE}/${projectName}/${shootName}/${normalized}`;
       });
 
       photoshoots[shootName] = imageUrls;
@@ -39,6 +39,6 @@ export default function photoshoots(): Projects[] {
     });
   }
 
-  console.log('Raw Projects:', rawProjects[0]);
+  console.log('Raw Projects:', rawProjects);
   return rawProjects;
 }
