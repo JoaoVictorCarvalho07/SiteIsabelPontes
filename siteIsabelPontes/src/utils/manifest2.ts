@@ -147,7 +147,7 @@ const manifest: {
         'milena_8.webp',
         'milena_9.webp',
       ],
-      'PATY SCHMIDT': [
+      'paty schmidt': [
         'PATY SCHMIDT_1.webp',
         'PATY SCHMIDT_2.webp',
         'PATY SCHMIDT_3.webp',

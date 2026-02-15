@@ -7,7 +7,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       'Projeto editorial inspirado na mitologia grega, explorando a beleza e a força feminina através de imagens poderosas e conceituais.',
     category: 'conceitual',
-    image: '/portfolio/afrodite/cover.jpg',
+    image: '/Afrodite/milena/milena_13.webp',
     photoshoots: [
       'afrodite-andressa',
       'afrodite-isabel',
@@ -23,7 +23,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       'Projeto editorial para a revista Época, destacando tendências de moda e estilo de vida, com uma abordagem contemporânea e sofisticada.',
     category: 'editorial',
-    image: '/portfolio/epoca/cover.jpg',
+    image: '/epoca/Anna_Julia/Anna_Julia_5.webp',
     photoshoots: [
       'epoca-andressa',
       'epoca-Anna_Julia',
@@ -41,7 +41,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       'Cobertura fotográfica de eventos, capturando momentos únicos e a atmosfera vibrante das pessoas e do festival.',
     category: 'direção-criativa',
-    image: '/portfolio/eventos/cover.jpg',
+    image: '/eventos/jheni e a cobra/jheni e a cobra_17.webp',
     photoshoots: [
       'eventos-jheni_e_a_cobra',
       'eventos-isabel',
@@ -57,7 +57,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       'Projeto feminino voltado para reunir mulheres inspiradoras e criativas, celebrando a diversidade e a força feminina através de fotos e histórias envolventes.',
     category: 'direção-criativa',
-    image: '/portfolio/musa_day/cover.jpg',
+    image: '/musa_day/Monica e a coruja/Monica e a coruja_9.webp',
     photoshoots: [
       'musa_day-Andressa_e_a_cobra',
       'musa_day-Daiara',
@@ -71,7 +71,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       'Série de ensaios fotográficos realizados em locações externas, explorando diferentes ambientes e estilos de iluminação.',
     category: 'editorial',
-    image: '/portfolio/ensaios_externos/cover.jpg',
+    image: '/ensaios_externos/*',
     photoshoots: ['ensaios_externos-MUSAS MÍSTICAS ENSAIO EXTERNO'],
   },
   {

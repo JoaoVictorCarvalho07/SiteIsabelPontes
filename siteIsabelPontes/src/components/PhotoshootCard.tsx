@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import type { Photoshoot, TeamMember } from '@/types/portfolio';
 import { Card } from '@/components/ui/card';
+import type { Photoshoot } from '@/data/photoshootsInputs';
+import { partners } from '@/data/personsData';
+import type { Person } from '@/types/person';
 
 interface PhotoshootCardProps {
   photoshoot: Photoshoot;
@@ -13,12 +15,13 @@ export function PhotoshootCard({
 }: PhotoshootCardProps) {
   const [showDetails, setShowDetails] = useState(false);
 
+  const persons = partners;
   return (
     <Card className="overflow-hidden rounded-2xl border-none bg-white shadow-md transition-all hover:shadow-lg">
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden bg-gray-300">
         <img
-          src={photoshoot.images[0]}
+          src={photoshoot.image_urls?.[0] || undefined}
           loading="lazy"
           decoding="async"
           alt={photoshoot.title}
@@ -61,26 +64,32 @@ export function PhotoshootCard({
                 Modelos
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {photoshoot.models.map((model) => (
-                  <TeamMemberTag key={model.id} member={model} />
-                ))}
+                {photoshoot.models?.map((model) => {
+                  const person = persons.find((p) => p.id === model);
+                  if (!person) return null;
+                  return <TeamMemberTag key={person.id} member={person} />;
+                })}
               </div>
             </div>
           )}
 
           {/* Helpers */}
-          {photoshoot.helpers.length > 0 && (
-            <div>
-              <p className="text-xs font-semibold uppercase text-gray-600">
-                Equipe
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {photoshoot.helpers.map((helper) => (
-                  <TeamMemberTag key={helper.id} member={helper} />
-                ))}
+          {photoshoot?.teamMembers?.length &&
+            photoshoot?.teamMembers?.length > 0 && (
+              <div>
+                ''
+                <p className="text-xs font-semibold uppercase text-gray-600">
+                  Equipe
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {photoshoot?.teamMembers?.map((helper) => {
+                    const person = partners.find((p) => p.id === helper);
+                    if (!person) return null;
+                    return <TeamMemberTag key={helper} member={person} />;
+                  })}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
 
         {/* Toggle Details Button */}
@@ -98,25 +107,30 @@ export function PhotoshootCard({
               <div>
                 <h4 className="mb-3 font-semibold text-black">Modelos</h4>
                 <div className="space-y-2">
-                  {photoshoot.models.map((model) => (
-                    <TeamMemberDetail key={model.id} member={model} />
-                  ))}
+                  {photoshoot.models.map((model) => {
+                    const person = persons.find((p) => p.id === model);
+                    if (!person) return null;
+                    return <TeamMemberDetail key={person.id} member={person} />;
+                  })}
                 </div>
               </div>
             )}
 
-            {photoshoot.helpers.length > 0 && (
-              <div>
-                <h4 className="mb-3 font-semibold text-black">
-                  Equipe de Suporte
-                </h4>
-                <div className="space-y-2">
-                  {photoshoot.helpers.map((helper) => (
-                    <TeamMemberDetail key={helper.id} member={helper} />
-                  ))}
+            {photoshoot?.teamMembers?.length &&
+              photoshoot?.teamMembers?.length > 0 && (
+                <div>
+                  <h4 className="mb-3 font-semibold text-black">
+                    Equipe de Suporte
+                  </h4>
+                  <div className="space-y-2">
+                    {photoshoot.teamMembers.map((helper) => {
+                      const person = partners.find((p) => p.id === helper);
+                      if (!person) return null;
+                      return <TeamMemberDetail key={helper} member={person} />;
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
         )}
       </div>
@@ -124,7 +138,7 @@ export function PhotoshootCard({
   );
 }
 
-function TeamMemberTag({ member }: { member: TeamMember }) {
+function TeamMemberTag({ member }: { member: Person }) {
   return (
     <a
       href={member.instagram || '#'}
@@ -138,8 +152,8 @@ function TeamMemberTag({ member }: { member: TeamMember }) {
   );
 }
 
-function TeamMemberDetail({ member }: { member: TeamMember }) {
-  const roleLabels: Record<TeamMember['role'], string> = {
+function TeamMemberDetail({ member }: { member: Person }) {
+  const roleLabels: Record<Exclude<Person['role'], undefined>, string> = {
     model: 'Modelo',
     stylist: 'Stylist',
     makeup: 'Maquiagem',
@@ -152,7 +166,9 @@ function TeamMemberDetail({ member }: { member: TeamMember }) {
     <div className="flex items-start justify-between rounded-lg bg-gray-50 p-3">
       <div>
         <p className="font-medium text-black">{member.name}</p>
-        <p className="text-xs text-gray-600">{roleLabels[member.role]}</p>
+        <p className="text-xs text-gray-600">
+          {member.role ? roleLabels[member.role] : ''}
+        </p>
       </div>
       <div className="flex gap-2">
         {member.instagram && (
@@ -165,9 +181,9 @@ function TeamMemberDetail({ member }: { member: TeamMember }) {
             IG
           </a>
         )}
-        {member.portfolio && (
+        {member.website && (
           <a
-            href={member.portfolio}
+            href={member.website}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-semibold text-black hover:underline"
