@@ -1,23 +1,20 @@
+import type { person } from '@/types/person';
 import type { Partner } from '@/types/partner';
-import { slugify } from '../utils/slugify';
+import type { Model } from '@/types/model';
+import type { TeamMember } from '@/types/teamMember';
 
 
-
-
-const rawPartners: PartnerInput[] = [
+export const partners: Model[] = [
   {
+    id: 'milena-silva',
     name: 'Milena Silva',
-    category: 'models',
     image: '/cards/Milena.jpg',
     description:
       'Modelo profissional com experiência em editorials conceituais',
     instagram: '@milenasilvaa',
     testimonial: 'Trabalhar com Isabel é uma experiência transformadora...',
   },
-  // outros...
+  {
+    
+  },
 ];
-
-export const partners: Partner[] = rawPartners.map((p, index) => ({
-  ...p,
-  id: `${slugify(p.name)}-${index + 1}`,
-}));

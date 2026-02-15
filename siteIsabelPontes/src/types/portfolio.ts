@@ -1,36 +1,16 @@
-export interface TeamMember {
-  id: string;
-  name: string;
-  role: 'model' | 'stylist' | 'makeup' | 'assistant' | 'hair' | 'producer';
-  image: string;
-  instagram?: string;
-  portfolio?: string;
-}
-
-export interface Photoshoot {
-  id: string;
-  title: string;
-  description: string;
-  concept: string;
-  date: string;
-  location: string;
-  images: string[];
-  models: TeamMember[];
-  helpers: TeamMember[];
-  featured: boolean;
-}
+export type ProjectCategory =
+  | 'all'
+  | 'editorial'
+  | 'direção-criativa'
+  | 'mídia-kit'
+  | 'conceitual'
+  | 'independentes';
 
 export interface PortfolioProject {
-  id: string;
+  id: string; // ex: "afrodite"
   title: string;
   description: string;
-  category:
-    | 'editorial'
-    | 'direção-criativa'
-    | 'mídia-kit'
-    | 'conceitual'
-    | 'independente'
-    | 'Ensaios';
-  image: string;
-  photoshoots: Photoshoot[];
+  category: ProjectCategory;
+  image: string; // capa do projeto
+  photoshoots: string[]; // ids dos photoshoots
 }

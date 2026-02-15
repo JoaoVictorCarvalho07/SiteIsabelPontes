@@ -23,6 +23,6 @@ export default defineConfig([
   },
   {
     plugins: { prettier: pluginPrettier },
-    rules: { 'prettier/prettier': 'warn' },
+    rules: { 'prettier/prettier': 'off' },
   },
 ]);

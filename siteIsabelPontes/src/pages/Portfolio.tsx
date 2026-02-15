@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { portfolioProjects } from '@/data/portfolioData';
 import { PhotoshootCard } from '@/components/PhotoshootCard';
 import { Button } from '@/components/ui/button';
-import type { ProjectCategory } from '@/types/ProjectCategory';
+import type { ProjectCategory } from '@/types/portfolio';
 import { CarouselSpacing } from '@/components/CarouselSpacing';
 import { cn } from '@/lib/utils';
 import { Modal } from '@/components/Modal';
@@ -15,6 +15,8 @@ const categoryLabels: Record<string, string> = {
   conceitual: 'Conceitual',
   independentes: 'Independentes',
 };
+
+
 export default function Portfolio() {
   const [photoshootIndex, setPhotoshootIndex] = useState<string | null>('');
   const [visible, setVisible] = useState(false);

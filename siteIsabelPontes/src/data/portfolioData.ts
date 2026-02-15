@@ -1,23 +1,11 @@
-import type { Partner } from '@/types/partner';
-import type {
-  PortfolioProject,
-  Photoshoot,
-  TeamMember,
-} from '@/types/portfolio';
+import type { PortfolioProject } from '@/types/portfolio';
+
+import type { partner } from '@/types/partner';
+
+import type { Photoshoot } from '@/types/photoshoot';
 import { slugify } from '@/utils/slugify';
 
-const DEFAULT_PROJECT_ID = 'independentes';
-// ✅ Raw types (sem id)
-type TeamMemberInput = Omit<TeamMember, 'id'>;
-type PhotoshootInput = Omit<Photoshoot, 'id' | 'models' | 'helpers'> & {
-  models: TeamMemberInput[];
-  helpers: TeamMemberInput[];
-};
-type PortfolioProjectInput = Omit<PortfolioProject, 'id' | 'photoshoots'> & {
-  photoshoots: PhotoshootInput[];
-};
-
-const rawPartners: Record<string, TeamMemberInput> = {
+const rawPartners: any = {
   milena: {
     name: 'Milena Silva',
     image: '/cards/Milena.jpg',
@@ -48,7 +36,7 @@ const rawPortfolio: PortfolioProjectInput[] = [
           '/Projetos/afrodite/ensaios/ensaio1/Milena.jpg',
           '/Projetos/afrodite/ensaios/ensaio1/Milena.jpg',
         ],
-        models: [rawPartners.milena],
+        models: ['Milena Silva'],
         helpers: [
           {
             name: 'Ana Costa',
@@ -145,29 +133,19 @@ const rawPortfolio: PortfolioProjectInput[] = [
   },
 ];
 
-// ✅ Geração automática de IDs (final)
-function memberId(m: TeamMemberInput) {
-  return `${slugify(m.name)}-${m.role}`;
-}
+// export const portfolioProjects: PortfolioProject[] = rawPortfolio.map(
+//   (project) => {
+//     const projectId = slugify(project.title);
 
-function shootId(projectTitle: string, shootTitle: string, index: number) {
-  // garante unicidade por projeto + ordem
-  return `${slugify(projectTitle)}-${slugify(shootTitle)}-${index + 1}`;
-}
-
-export const portfolioProjects: PortfolioProject[] = rawPortfolio.map(
-  (project) => {
-    const projectId = slugify(project.title);
-
-    return {
-      ...project,
-      id: projectId,
-      photoshoots: project.photoshoots.map((shoot, i) => ({
-        ...shoot,
-        id: shootId(project.title, shoot.title, i),
-        models: shoot.models.map((m) => ({ ...m, id: memberId(m) })),
-        helpers: shoot.helpers.map((h) => ({ ...h, id: memberId(h) })),
-      })),
-    };
-  },
-);
+//     return {
+//       ...project,
+//       id: projectId,
+//       photoshoots: project.photoshoots.map((shoot, i) => ({
+//         ...shoot,
+//         id: shootId(project.title, shoot.title, i),
+//         models: shoot.models.map((m) => ({ ...m, id: memberId(m) })),
+//         helpers: shoot.helpers.map((h) => ({ ...h, id: memberId(h) })),
+//       })),
+//     };
+//   },
+// );
