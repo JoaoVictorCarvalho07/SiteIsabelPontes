@@ -9,12 +9,8 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Partners from './pages/Partners';
 import NotFound from './pages/NotFound';
-import { photoshootsById } from './data/photoshootsData';
 
 function App() {
-  // const photos = photoshootsById;
-  // console.log('Photoshoot Data:', photos);
-  // console.log(shoot);
   return (
     <BrowserRouter>
       <NavBar></NavBar>

@@ -1,8 +1,7 @@
 import type { Partner } from '@/types/partner';
-import { slugify } from '../utils/slugify';
+import { slugify } from '@/utils/slugify';
 
-
-
+type PartnerInput = Omit<Partner, 'id'>;
 
 const rawPartners: PartnerInput[] = [
   {

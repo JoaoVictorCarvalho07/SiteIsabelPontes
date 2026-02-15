@@ -1,5 +1,7 @@
 import manifest from '@/utils/manifest2';
-import { photoshootInputs, type Photoshoot } from './photoshootsInputs';
+import { photoshootInputs } from './photoshootsInputs';
+import type { Photoshoot } from '@/types/photoshoot';
+
 const BASE = import.meta.env.VITE_R2_PUBLIC_BASE;
 
 export const photoshootsById: Record<string, Photoshoot[]> = Object.fromEntries(

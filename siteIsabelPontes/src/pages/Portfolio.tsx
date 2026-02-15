@@ -21,7 +21,6 @@ const categoryLabels: Record<string, string> = {
 type PhotoshootsByProject = Record<string, Photoshoot[]>;
 
 export default function Portfolio() {
-  const BASE = import.meta.env.VITE_R2_PUBLIC_BASE;
   const [selectedPhotoshootId, setSelectedPhotoshootId] = useState<
     string | null
   >(null);

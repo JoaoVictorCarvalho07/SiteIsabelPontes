@@ -1,6 +1,6 @@
 import type { PortfolioProject } from '@/types/portfolio';
 
-const manifest: PortfolioProject[] = [
+export const manifest: PortfolioProject[] = [
   {
     id: 'afrodite',
     title: 'Afrodite',
