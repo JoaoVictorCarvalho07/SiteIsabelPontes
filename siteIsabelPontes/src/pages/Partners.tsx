@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { partners } from '@/data/partners';
+import { partners } from '@/data/personsData';
 import { PartnerCard } from '@/components/PartnerCard';
 import type { PersonCategory } from '@/types/person';
 import type { Person } from '@/types/person';
