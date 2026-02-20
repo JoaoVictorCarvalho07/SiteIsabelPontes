@@ -8,6 +8,8 @@ import { CarouselSpacing } from '@/components/CarouselSpacing';
 import { cn } from '@/lib/utils';
 import { Modal } from '@/components/Modal';
 import type { Photoshoot } from '@/types/photoshoot';
+import type { Person } from '@/types/person';
+import { partners } from '@/data/personsData';
 
 const categoryLabels: Record<string, string> = {
   all: 'Todos',
@@ -15,13 +17,13 @@ const categoryLabels: Record<string, string> = {
   'direção-criativa': 'Direção Criativa',
   'mídia-kit': 'Mídia Kit',
   conceitual: 'Conceitual',
-  independentes: 'Independentes',
+  personalizados: 'Personalizados',
 };
 
 type PhotoshootsByProject = Record<string, Photoshoot[]>;
+const partnersData: Person[] = partners; // ✅ lista completa de parceiros para passar para os cards
 
 export default function Portfolio() {
-  const BASE = import.meta.env.VITE_R2_PUBLIC_BASE;
   const [selectedPhotoshootId, setSelectedPhotoshootId] = useState<
     string | null
   >(null);
@@ -33,8 +35,8 @@ export default function Portfolio() {
   const filteredProjects =
     selectedCategory === 'all'
       ? portfolioProjects
-      : selectedCategory === 'independentes'
-        ? portfolioProjects.filter((p) => p.id === 'independentes')
+      : selectedCategory === 'personalizados'
+        ? portfolioProjects.filter((p) => p.id === 'personalizados')
         : portfolioProjects.filter((p) => p.category === selectedCategory);
 
   const shootsMap = photoshootsById as PhotoshootsByProject;
@@ -44,9 +46,12 @@ export default function Portfolio() {
     return filteredProjects.map((project) => {
       const shoots = shootsMap[project.id] ?? shootsMap[project.title] ?? [];
       // ^ fallback: se sua key estiver como title (Afrodite) e seu id for slug (afrodite)
+      console.log(`Project: ${project.title}, Found Shoots: ${shoots.length}`);
       return { project, shoots };
     });
   }, [filteredProjects, shootsMap]);
+
+  console.log('shootsMap:', shootsMap);
 
   // ✅ acha o photoshoot sele  cionado (procura em todos os projetos)
   const selectedShoot = useMemo(() => {
@@ -134,7 +139,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Project Image */}
-                {selectedCategory !== 'independentes' && (
+                {selectedCategory !== 'personalizados' && (
                   <div className="mb-8 h-80 sm:h-100 md:h-120 overflow-hidden rounded-2xl bg-gray-300 ">
                     <img
                       src={shoots[0]?.image_urls?.[0] || project.image}
@@ -158,16 +163,35 @@ export default function Portfolio() {
                     </div>
 
                     <div className="grid gap-6 md:grid-cols-2">
-                      {shoots.map((photoshoot) => (
-                        <PhotoshootCard
-                          key={photoshoot.id}
-                          photoshoot={photoshoot}
-                          onImageClick={() => {
-                            setVisible(true);
-                            setSelectedPhotoshootId(photoshoot.id);
-                          }}
-                        />
-                      ))}
+                      {shoots.map((photoshoot) => {
+                        const filteredPartners = partnersData.filter(
+                          (partner) =>
+                            photoshoot.partners?.includes(partner.id),
+                        );
+                        console.log(filteredPartners);
+
+                        const models = partnersData.filter((partner) =>
+                          photoshoot.models?.includes(partner.id),
+                        );
+                        console.log(models);
+
+                        const helpers = partnersData.filter((partner) =>
+                          photoshoot.teamMembers?.includes(partner.id),
+                        );
+                        return (
+                          <PhotoshootCard
+                            partners={filteredPartners}
+                            models={models}
+                            helpers={helpers}
+                            key={photoshoot.id}
+                            photoshoot={photoshoot}
+                            onImageClick={() => {
+                              setVisible(true);
+                              setSelectedPhotoshootId(photoshoot.id);
+                            }}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -195,7 +219,6 @@ export default function Portfolio() {
                             Total de Pessoas Envolvidas
                           </h4>
                           <p className="text-gray-700">
-                            Modelos:{' '}
                             {shoots.reduce(
                               (acc, s) => acc + (s.models?.length ?? 0),
                               0,

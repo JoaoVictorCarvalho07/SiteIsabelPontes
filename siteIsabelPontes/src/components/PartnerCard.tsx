@@ -1,15 +1,15 @@
-import type { Partner } from '@/types/partner';
+import type { Person } from '@/types/person';
 import { Card } from '@/components/ui/card';
 
 interface PartnerCardProps {
-  partner: Partner;
+  partner: Person;
 }
 
 export function PartnerCard({ partner }: PartnerCardProps) {
   return (
-    <Card className="overflow-hidden rounded-xl border-none bg-white shadow-md transition-all hover:shadow-lg">
+    <Card  className="overflow-hidden rounded-xl border-none bg-white shadow-md transition-all hover:shadow-lg">
       {/* Image Section */}
-      <div className="relative h-48 overflow-hidden bg-gray-300">
+      <div id={partner.id} className="relative h-48 overflow-hidden bg-gray-300">
         <img
           src={partner.image}
           alt={partner.name}

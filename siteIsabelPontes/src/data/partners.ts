@@ -1,10 +1,7 @@
-import type { Partner } from '@/types/partner';
+import type { Person } from '@/types/person';
 import { slugify } from '../utils/slugify';
 
-
-
-
-const rawPartners: PartnerInput[] = [
+const rawPartners: Omit<Person, 'id'>[] = [
   {
     name: 'Milena Silva',
     category: 'models',
@@ -17,7 +14,7 @@ const rawPartners: PartnerInput[] = [
   // outros...
 ];
 
-export const partners: Partner[] = rawPartners.map((p, index) => ({
+export const partners: Person[] = rawPartners.map((p, index) => ({
   ...p,
   id: `${slugify(p.name)}-${index + 1}`,
 }));

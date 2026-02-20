@@ -25,6 +25,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'editorial',
     image: '/epoca/Anna_Julia/Anna_Julia_5.webp',
     photoshoots: [
+      'epoca-Nadia_Lobkov1',
       'epoca-andressa',
       'epoca-Anna_Julia',
       'epoca-GLAUCIA_OLLIE',
@@ -79,12 +80,11 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Personalizados',
     description:
       'Projetos personalizados para clientes, adaptando o estilo e a abordagem fotográfica às necessidades e preferências individuais.',
-    category: 'independentes',
-    image: '/portfolio/personalizados/cover.jpg',
+    category: 'personalizados',
+    image: '/Afrodite/milena/milena_13.webp',
     photoshoots: [
       'personalizados-jaci',
       'personalizados-keshy',
-      'personalizados-Nadia_Lobkov1',
       'personalizados-Nadia_Lobkov2',
       'personalizados-Lara',
       'personalizados-Monica',

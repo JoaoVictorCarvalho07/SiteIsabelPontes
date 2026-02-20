@@ -3,19 +3,28 @@ import { Card } from '@/components/ui/card';
 import type { Photoshoot } from '@/data/photoshootsInputs';
 import { partners } from '@/data/personsData';
 import type { Person } from '@/types/person';
+import { Link } from 'react-router';
 
 interface PhotoshootCardProps {
   photoshoot: Photoshoot;
+  partners: Person[];
+  models: Person[];
+  helpers: Person[];
+  // Lista completa de parceiros para buscar os detalhes
   onImageClick?: () => void; // Callback para quando a imagem for clicada
 }
 
 export function PhotoshootCard({
+  partners,
+  models,
+  helpers,
   photoshoot,
   onImageClick,
 }: PhotoshootCardProps) {
   const [showDetails, setShowDetails] = useState(false);
 
-  const persons = partners;
+  const persons = [...partners, ...models, ...helpers];
+
   return (
     <Card className="overflow-hidden rounded-2xl border-none bg-white shadow-md transition-all hover:shadow-lg">
       {/* Image Section */}
@@ -63,33 +72,33 @@ export function PhotoshootCard({
               <p className="text-xs font-semibold uppercase text-gray-600">
                 Modelos
               </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {photoshoot.models?.map((model) => {
-                  const person = persons.find((p) => p.id === model);
-                  if (!person) return null;
-                  return <TeamMemberTag key={person.id} member={person} />;
+              <div className="mt-2 flex flex-wrap gap-2 text-black ">
+                {models.map((model) => {
+                  {
+                    console.log('Model encontrado:', model.name);
+                  }
+                  return (
+                    <Link to={`/parceiros/${model.id}`}>
+                      <TeamMemberTag key={model.id} member={model} />;
+                    </Link>
+                  );
                 })}
               </div>
             </div>
           )}
 
           {/* Helpers */}
-          {photoshoot?.teamMembers?.length &&
-            photoshoot?.teamMembers?.length > 0 && (
-              <div>
-                ''
-                <p className="text-xs font-semibold uppercase text-gray-600">
-                  Equipe
-                </p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {photoshoot?.teamMembers?.map((helper) => {
-                    const person = partners.find((p) => p.id === helper);
-                    if (!person) return null;
-                    return <TeamMemberTag key={helper} member={person} />;
-                  })}
-                </div>
-              </div>
-            )}
+          {helpers.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold uppercase text-gray-600">
+                Equipe
+              </p>
+
+              {helpers.map((helper) => {
+                return <TeamMemberTag key={helper.id} member={helper} />;
+              })}
+            </div>
+          )}
         </div>
 
         {/* Toggle Details Button */}
@@ -107,30 +116,35 @@ export function PhotoshootCard({
               <div>
                 <h4 className="mb-3 font-semibold text-black">Modelos</h4>
                 <div className="space-y-2">
-                  {photoshoot.models.map((model) => {
-                    const person = persons.find((p) => p.id === model);
-                    if (!person) return null;
-                    return <TeamMemberDetail key={person.id} member={person} />;
-                  })}
+                  {models.length > 0 &&
+                    models.map((model) => {
+                      return <TeamMemberDetail key={model.id} member={model} />;
+                    })}
                 </div>
               </div>
             )}
 
-            {photoshoot?.teamMembers?.length &&
-              photoshoot?.teamMembers?.length > 0 && (
-                <div>
-                  <h4 className="mb-3 font-semibold text-black">
-                    Equipe de Suporte
-                  </h4>
-                  <div className="space-y-2">
+            {partners.length > 0 && (
+              <div>
+                <h4 className="mb-3 font-semibold text-black">
+                  Equipe de Suporte
+                </h4>
+
+                <div className="space-y-2">
+                  {partners.map((helper) => {
+                    return <TeamMemberDetail key={helper.id} member={helper} />;
+                  })}
+                </div>
+
+                {/* <div className="space-y-2">
                     {photoshoot.teamMembers.map((helper) => {
                       const person = partners.find((p) => p.id === helper);
                       if (!person) return null;
                       return <TeamMemberDetail key={helper} member={person} />;
                     })}
-                  </div>
-                </div>
-              )}
+                  </div> */}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -140,15 +154,15 @@ export function PhotoshootCard({
 
 function TeamMemberTag({ member }: { member: Person }) {
   return (
-    <a
-      href={member.instagram || '#'}
+    <Link
+      to={`/partners#${member.id}`}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800 transition-all hover:bg-black hover:text-white"
     >
       <span>{member.name}</span>
       <span className="text-xs opacity-75">({member.role})</span>
-    </a>
+    </Link>
   );
 }
 

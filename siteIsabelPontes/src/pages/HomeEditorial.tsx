@@ -61,7 +61,7 @@ const cards: EditorialCard[] = [
     title: 'Fotografia artística',
     description: 'Ensaios conceituais e direção de pessoas.',
     image: '/cards/Milena.jpg',
-    href: '/fotografia',
+    href: '/portfolio',
   },
   {
     title: 'Mídia kit & creator',
