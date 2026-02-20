@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import type { Photoshoot } from '@/data/photoshootsInputs';
+import type { Photoshoot } from '@/types/photoshoot';
 import { partners } from '@/data/personsData';
 import type { Person } from '@/types/person';
 import { Link } from 'react-router';

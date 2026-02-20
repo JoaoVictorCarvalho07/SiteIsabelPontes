@@ -1,5 +1,5 @@
 import type { Person } from '@/types/person';
-import { slugify } from '../utils/slugify';
+import { slugify } from '@/utils/slugify';
 
 const rawPartners: Omit<Person, 'id'>[] = [
   {
