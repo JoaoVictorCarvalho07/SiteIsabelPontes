@@ -73,6 +73,36 @@ The `NavBar` component (`src/components/NavBar.tsx`) is highly interactive:
 
 ---
 
+## 📊 Data Architecture & Performance
+
+### Data Flow
+The project uses a multi-layered data structure to manage projects and images:
+
+1.  **Raw Metadata (`src/data/photoshootsInputs.ts`)**: Contains manually entered metadata for each photoshoot (title, date, models, concept).
+2.  **Storage Manifest (`src/utils/manifest2.ts`)**: A generated list of all image files available in the Cloudflare R2 storage, organized by project and session.
+3.  **Data Bridge (`src/data/photoshootsData.ts`)**: Dynamically combines metadata with the manifest to generate absolute image URLs using the `VITE_R2_PUBLIC_BASE` environment variable.
+4.  **Relational Linkage**:
+    *   `PortfolioProject` links to multiple `Photoshoot` IDs.
+    *   `Photoshoot` links to `Person` IDs (models/partners).
+    *   The UI performs "joins" at runtime using these IDs.
+
+### Performance Analysis
+
+#### Current Strengths
+-   **Image Format**: Extensive use of `.webp` ensures high quality with low file size.
+-   **Lazy Loading**: Images in cards utilize native `loading="lazy"` and `decoding="async"`.
+-   **Memoization**: Key data transformations in `Portfolio.tsx` are wrapped in `useMemo` to prevent redundant calculations on re-renders.
+
+#### Areas for Optimization
+-   **Bundle Size**: The `manifest2.ts` file (currently ~21KB) is imported statically. As the number of photos grows, this will increase the initial JavaScript payload.
+    *   *Recommendation*: Move the manifest to a JSON file fetched only when needed, or implement a backend/edge-function API.
+-   **Runtime Join Complexity**: The `Portfolio` page currently performs nested filter/find operations to resolve partner details for every photoshoot card.
+    *   *Recommendation*: Pre-index partners into a `Map` (O(1) lookup) instead of using `Array.filter` (O(N) lookup) inside loops.
+-   **Static Imports**: All project data is loaded upfront.
+    *   *Recommendation*: Use dynamic imports or React Query to fetch data only when the user navigates to specific sections.
+
+---
+
 ## 📄 Routes & Pages
 
 - `/`: **HomeEditorial** - Main landing page with featured editorial work.
