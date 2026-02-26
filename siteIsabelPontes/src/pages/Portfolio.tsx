@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { Modal } from '@/components/Modal';
 import type { Photoshoot } from '@/types/photoshoot';
 import type { Person } from '@/types/person';
-import { partners } from '@/data/personsData';
+import { personsById } from '@/data/personsData';
 
 const categoryLabels: Record<string, string> = {
   all: 'Todos',
@@ -21,7 +21,6 @@ const categoryLabels: Record<string, string> = {
 };
 
 type PhotoshootsByProject = Record<string, Photoshoot[]>;
-const partnersData: Person[] = partners; // ✅ lista completa de parceiros para passar para os cards
 
 export default function Portfolio() {
   const [selectedPhotoshootId, setSelectedPhotoshootId] = useState<
@@ -164,20 +163,18 @@ export default function Portfolio() {
 
                     <div className="grid gap-6 md:grid-cols-2">
                       {shoots.map((photoshoot) => {
-                        const filteredPartners = partnersData.filter(
-                          (partner) =>
-                            photoshoot.partners?.includes(partner.id),
-                        );
-                        console.log(filteredPartners);
+                        const filteredPartners = (photoshoot.partners ?? [])
+                          .map((id) => personsById[id])
+                          .filter((p): p is Person => !!p);
 
-                        const models = partnersData.filter((partner) =>
-                          photoshoot.models?.includes(partner.id),
-                        );
-                        console.log(models);
+                        const models = (photoshoot.models ?? [])
+                          .map((id) => personsById[id])
+                          .filter((p): p is Person => !!p);
 
-                        const helpers = partnersData.filter((partner) =>
-                          photoshoot.teamMembers?.includes(partner.id),
-                        );
+                        const helpers = (photoshoot.teamMembers ?? [])
+                          .map((id) => personsById[id])
+                          .filter((p): p is Person => !!p);
+
                         return (
                           <PhotoshootCard
                             partners={filteredPartners}

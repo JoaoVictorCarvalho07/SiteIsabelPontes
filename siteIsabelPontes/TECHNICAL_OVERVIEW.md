@@ -95,11 +95,13 @@ The project uses a multi-layered data structure to manage projects and images:
 
 #### Areas for Optimization
 -   **Bundle Size**: The `manifest2.ts` file (currently ~21KB) is imported statically. As the number of photos grows, this will increase the initial JavaScript payload.
-    *   *Recommendation*: Move the manifest to a JSON file fetched only when needed, or implement a backend/edge-function API.
--   **Runtime Join Complexity**: The `Portfolio` page currently performs nested filter/find operations to resolve partner details for every photoshoot card.
-    *   *Recommendation*: Pre-index partners into a `Map` (O(1) lookup) instead of using `Array.filter` (O(N) lookup) inside loops.
--   **Static Imports**: All project data is loaded upfront.
-    *   *Recommendation*: Use dynamic imports or React Query to fetch data only when the user navigates to specific sections.
+    *   *Implemented Step*: A `public/manifest.json` has been prepared. The next step is to refactor `photoshootsData.ts` to fetch this JSON asynchronously instead of importing it.
+-   **Runtime Join Complexity**:
+    *   *Status*: **Optimized**. Partners and models are now resolved using `personsById` (a pre-indexed Record) in `Portfolio.tsx`, reducing lookup time from O(N) to O(1).
+-   **Data Loading Flow**:
+    *   *New Pattern*: Added `usePhotoshoots` hook in `src/hooks/usePhotoshoots.ts`. This hook demonstrates how to move away from static TS imports to a dynamic `fetch()` based approach using `public/manifest.json`.
+-   **Static Imports**: All project data is currently loaded upfront.
+    *   *Recommendation*: Gradually migrate existing pages to use the `usePhotoshoots` hook to reduce initial bundle size.
 
 ---
 
