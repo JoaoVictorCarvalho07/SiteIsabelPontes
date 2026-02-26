@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import type { Photoshoot } from '@/types/photoshoot';
-import { partners } from '@/data/personsData';
 import type { Person } from '@/types/person';
 import { Link } from 'react-router';
 
@@ -22,8 +21,6 @@ export function PhotoshootCard({
   onImageClick,
 }: PhotoshootCardProps) {
   const [showDetails, setShowDetails] = useState(false);
-
-  const persons = [...partners, ...models, ...helpers];
 
   return (
     <Card className="overflow-hidden rounded-2xl border-none bg-white shadow-md transition-all hover:shadow-lg">
