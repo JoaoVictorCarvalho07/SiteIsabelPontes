@@ -1,13 +1,12 @@
 import { useMemo, useState } from 'react';
 import { portfolioProjects } from '@/data/portfolioData';
-import { photoshootsById } from '@/data/photoshootsData'; // ✅ seu formato: { Projeto: Photoshoot[] }
+import { usePhotoshoots } from '@/hooks/usePhotoshoots';
 import { PhotoshootCard } from '@/components/PhotoshootCard';
 import { Button } from '@/components/ui/button';
 import type { ProjectCategory } from '@/types/portfolio';
 import { CarouselSpacing } from '@/components/CarouselSpacing';
 import { cn } from '@/lib/utils';
 import { Modal } from '@/components/Modal';
-import type { Photoshoot } from '@/types/photoshoot';
 import type { Person } from '@/types/person';
 import { personsById } from '@/data/personsData';
 
@@ -20,9 +19,8 @@ const categoryLabels: Record<string, string> = {
   personalizados: 'Personalizados',
 };
 
-type PhotoshootsByProject = Record<string, Photoshoot[]>;
-
 export default function Portfolio() {
+  const { data: shootsMap, loading, error } = usePhotoshoots();
   const [selectedPhotoshootId, setSelectedPhotoshootId] = useState<
     string | null
   >(null);
@@ -38,7 +36,6 @@ export default function Portfolio() {
         ? portfolioProjects.filter((p) => p.id === 'personalizados')
         : portfolioProjects.filter((p) => p.category === selectedCategory);
 
-  const shootsMap = photoshootsById as PhotoshootsByProject;
   // ✅ resolve projects -> shoots (usando a key do projeto)
   // Como você disse: o id do projeto = nome da pasta do projeto (key no map)
   const resolvedProjects = useMemo(() => {
@@ -99,6 +96,23 @@ export default function Portfolio() {
 
         {/* Content */}
         <section className="mx-auto max-w-6xl px-6 py-16">
+          {loading && (
+            <div className="flex h-32 items-center justify-center">
+              <p className="text-lg text-gray-600 animate-pulse">
+                Carregando projetos...
+              </p>
+            </div>
+          )}
+
+          {error && (
+            <div className="flex h-32 items-center justify-center">
+              <p className="text-lg text-destructive">
+                Erro ao carregar projetos. Por favor, tente novamente mais
+                tarde.
+              </p>
+            </div>
+          )}
+
           {/* Category Filter */}
           <div className="mb-12 flex flex-wrap gap-3">
             {Object.entries(categoryLabels).map(([key, label]) => (

@@ -155,7 +155,7 @@ export default function Partners({ partner }: { partner?: Person }) {
                     <div>
                       <h3 className="font-bold text-black">{partner.name}</h3>
                       <p className="text-sm text-gray-600">
-                        {categoryLabels[partner.category]}
+                        {partner.category ? categoryLabels[partner.category] : ''}
                       </p>
                     </div>
                   </div>

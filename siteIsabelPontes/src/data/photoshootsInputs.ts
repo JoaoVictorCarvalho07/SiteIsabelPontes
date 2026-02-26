@@ -2,7 +2,7 @@ import type { Photoshoot } from '@/types/photoshoot';
 
 export const photoshootInputs: Record<string, Photoshoot[]>[] = [
   {
-    Afrodite: [
+    afrodite: [
       {
         id: 'afrodite-andressa',
         shootKey: 'Andressa',
@@ -101,6 +101,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: ['milena-silva'],
         featured: false,
+        image_urls: [],
       },
       {
         id: 'epoca-andressa',
@@ -159,7 +160,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         image_urls: [],
       },
     ],
-    Eventos: [
+    eventos: [
       {
         id: 'eventos-jheni_e_a_cobra',
         shootKey: 'jheni_e_a_cobra',
@@ -189,7 +190,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         image_urls: [],
       },
     ],
-    Musa_Day: [
+    musa_day: [
       {
         id: 'musa_day-isabel',
         shootKey: 'Isabel',
@@ -232,6 +233,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: [],
         featured: false,
+        image_urls: [],
       },
     ],
     personalizados: [
@@ -247,6 +249,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: [],
         featured: false,
+        image_urls: [],
       },
       {
         id: 'personalizados-keshy',
@@ -260,6 +263,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: [],
         featured: false,
+        image_urls: [],
       },
 
       {
@@ -274,6 +278,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: [],
         featured: false,
+        image_urls: [],
       },
       {
         id: 'personalizados-lara',
@@ -287,6 +292,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: [],
         featured: false,
+        image_urls: [],
       },
       {
         id: 'personalizados-monica',
@@ -300,6 +306,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         teamMembers: ['Andressa', 'Isabel Pontes', 'Tallyta'],
         partners: [],
         featured: false,
+        image_urls: [],
       },
     ],
   },
