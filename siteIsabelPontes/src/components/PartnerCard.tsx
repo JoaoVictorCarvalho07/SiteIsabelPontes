@@ -1,4 +1,4 @@
-import type { Person } from '@/types/person';
+import type { Person, PersonCategory } from '@/types/person';
 import { Card } from '@/components/ui/card';
 
 interface PartnerCardProps {
@@ -64,8 +64,9 @@ export function PartnerCard({ partner }: PartnerCardProps) {
   );
 }
 
-function getCategoryLabel(category: Partner['category']): string {
-  const labels: Record<Partner['category'], string> = {
+function getCategoryLabel(category: Person['category']): string {
+  if (!category) return '';
+  const labels: Record<PersonCategory, string> = {
     models: 'Modelos',
     agências: 'Agências',
     stylists: 'Stylists',

@@ -53,7 +53,7 @@ The project features a sophisticated system to ensure text readability across va
 ### 2. Data-Driven Architecture
 Most of the content is managed through structured TypeScript files in `src/data/`, making it easy to add new projects without touching UI logic.
 - **Portfolio & Photoshoots**: Projects are defined in `portfolioData.ts` and their detailed photoshoots in `photoshootsInputs.ts`.
-- **Manifest System**: `src/data/photoshootsData.ts` uses `src/utils/manifest2.ts` to dynamically resolve image paths.
+-   **Manifest System**: Uses an asynchronous `public/manifest.json` fetched via the `usePhotoshoots` hook to dynamically resolve image paths.
 - **External Storage**: Images are hosted on Cloudflare R2 (or similar), with the base URL configured via `VITE_R2_PUBLIC_BASE` in the `.env` file.
 
 ### 3. Advanced Theming (Tailwind 4)
@@ -79,8 +79,8 @@ The `NavBar` component (`src/components/NavBar.tsx`) is highly interactive:
 The project uses a multi-layered data structure to manage projects and images:
 
 1.  **Raw Metadata (`src/data/photoshootsInputs.ts`)**: Contains manually entered metadata for each photoshoot (title, date, models, concept).
-2.  **Storage Manifest (`src/utils/manifest2.ts`)**: A generated list of all image files available in the Cloudflare R2 storage, organized by project and session.
-3.  **Data Bridge (`src/data/photoshootsData.ts`)**: Dynamically combines metadata with the manifest to generate absolute image URLs using the `VITE_R2_PUBLIC_BASE` environment variable.
+2.  **Storage Manifest (`public/manifest.json`)**: A static JSON list of all image files available in the Cloudflare R2 storage. Moving this to a JSON file prevents bundle bloat.
+3.  **Data Bridge (`src/hooks/usePhotoshoots.ts`)**: A custom hook that fetches the manifest asynchronously and combines it with the raw metadata to resolve absolute image URLs.
 4.  **Relational Linkage**:
     *   `PortfolioProject` links to multiple `Photoshoot` IDs.
     *   `Photoshoot` links to `Person` IDs (models/partners).
@@ -94,14 +94,12 @@ The project uses a multi-layered data structure to manage projects and images:
 -   **Memoization**: Key data transformations in `Portfolio.tsx` are wrapped in `useMemo` to prevent redundant calculations on re-renders.
 
 #### Areas for Optimization
--   **Bundle Size**: The `manifest2.ts` file (currently ~21KB) is imported statically. As the number of photos grows, this will increase the initial JavaScript payload.
-    *   *Implemented Step*: A `public/manifest.json` has been prepared. The next step is to refactor `photoshootsData.ts` to fetch this JSON asynchronously instead of importing it.
+-   **Bundle Size**:
+    *   *Status*: **Optimized**. The image manifest has been moved from a static `.ts` file to an asynchronous `manifest.json`. This ensures that as the portfolio grows, the initial JavaScript bundle remains small.
 -   **Runtime Join Complexity**:
-    *   *Status*: **Optimized**. Partners and models are now resolved using `personsById` (a pre-indexed Record) in `Portfolio.tsx`, reducing lookup time from O(N) to O(1).
+    *   *Status*: **Optimized**. Partners and models are resolved using `personsById` (a pre-indexed Record), reducing lookup time from O(N) to O(1).
 -   **Data Loading Flow**:
-    *   *New Pattern*: Added `usePhotoshoots` hook in `src/hooks/usePhotoshoots.ts`. This hook demonstrates how to move away from static TS imports to a dynamic `fetch()` based approach using `public/manifest.json`.
--   **Static Imports**: All project data is currently loaded upfront.
-    *   *Recommendation*: Gradually migrate existing pages to use the `usePhotoshoots` hook to reduce initial bundle size.
+    *   *Status*: **Improved**. The `Portfolio` page now uses the `usePhotoshoots` hook to load project data on-demand via `fetch()`, with proper loading and error state handling.
 
 ---
 
@@ -123,4 +121,4 @@ As the project grows, consider the following:
 - **Component Reusability**: Continue using the `ui/` folder for atomic components.
 - **Data Validation**: The current data-driven approach is robust, but ensure types in `src/types/` are strictly followed.
 - **Image Optimization**: Since images are loaded from external R2 storage, ensure they are optimized/compressed before upload.
-- **Manifest Updates**: Keep `manifest2.ts` in sync with the actual storage structure.
+-   **Manifest Updates**: Keep `public/manifest.json` in sync with the actual storage structure.

@@ -19,13 +19,25 @@ export function usePhotoshoots() {
         const resolvedData: Record<string, Photoshoot[]> = Object.fromEntries(
           photoshootInputs.flatMap((project) =>
             Object.entries(project).map(([id, shootkey]) => {
+              const projectId = id.toLowerCase();
+
+              // Find project in manifest (case-insensitive)
+              const manifestProjectKey = Object.keys(manifest.projects || {}).find(
+                (k) => k.toLowerCase() === projectId
+              );
+              const projectManifest = manifestProjectKey ? manifest.projects[manifestProjectKey] : null;
+
               const ensaios: Photoshoot[] = shootkey.map((element) => {
-                const projectId = id.split('-')[0];
-                const files = manifest.projects?.[projectId]?.[element.shootKey] ?? [];
+                // Find shoot in project manifest (case-insensitive)
+                const manifestShootKey = Object.keys(projectManifest || {}).find(
+                  (k) => k.toLowerCase() === element.shootKey.toLowerCase()
+                );
+                const files = manifestShootKey ? projectManifest[manifestShootKey] : [];
 
                 const image_urls = files.map((file: string) => {
                   const normalized = file.startsWith('/') ? file.slice(1) : file;
-                  return `${BASE}/${projectId}/${element.shootKey}/${normalized}`;
+                  // Use the actual manifest keys for the URL to ensure R2 path is correct
+                  return `${BASE}/${manifestProjectKey}/${manifestShootKey}/${normalized}`;
                 });
 
                 return {
@@ -41,6 +53,7 @@ export function usePhotoshoots() {
 
         setData(resolvedData);
       } catch (err) {
+        console.error('Error loading photoshoots:', err);
         setError(err instanceof Error ? err : new Error('Unknown error'));
       } finally {
         setLoading(false);
