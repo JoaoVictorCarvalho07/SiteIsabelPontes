@@ -42,7 +42,6 @@ export default function Portfolio() {
     return filteredProjects.map((project) => {
       const shoots = shootsMap[project.id] ?? shootsMap[project.title] ?? [];
       // ^ fallback: se sua key estiver como title (Afrodite) e seu id for slug (afrodite)
-      console.log(`Project: ${project.title}, Found Shoots: ${shoots.length}`);
       return { project, shoots };
     });
   }, [filteredProjects, shootsMap]);

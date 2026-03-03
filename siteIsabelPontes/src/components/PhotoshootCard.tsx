@@ -27,7 +27,7 @@ export function PhotoshootCard({
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden bg-gray-300">
         <img
-          src={photoshoot.image_urls?.[0] || undefined}
+          src={photoshoot.capa || '/placeholder.jpg'}
           loading="lazy"
           decoding="async"
           alt={photoshoot.title}
@@ -71,9 +71,6 @@ export function PhotoshootCard({
               </p>
               <div className="mt-2 flex flex-wrap gap-2 text-black ">
                 {models.map((model) => {
-                  {
-                    console.log('Model encontrado:', model.name);
-                  }
                   return (
                     <Link to={`/parceiros/${model.id}`}>
                       <TeamMemberTag key={model.id} member={model} />;

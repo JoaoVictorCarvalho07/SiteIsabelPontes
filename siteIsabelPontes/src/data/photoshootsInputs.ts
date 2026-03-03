@@ -2,7 +2,7 @@ import type { Photoshoot } from '@/types/photoshoot';
 
 export const photoshootInputs: Record<string, Photoshoot[]>[] = [
   {
-    afrodite: [
+    Afrodite: [
       {
         id: 'afrodite-andressa',
         shootKey: 'Andressa',
@@ -58,6 +58,7 @@ export const photoshootInputs: Record<string, Photoshoot[]>[] = [
         partners: [],
         featured: true,
         image_urls: [],
+
       },
       {
         id: 'afrodite-paty_anie',

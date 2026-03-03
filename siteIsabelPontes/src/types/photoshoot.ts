@@ -13,5 +13,6 @@ export interface Photoshoot {
   teamMembers?: PersonId[];
   partners?: PersonId[];
   featured: boolean;
+  capa?: string; // URL da imagem de capa
 }
   

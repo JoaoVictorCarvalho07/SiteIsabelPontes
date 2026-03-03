@@ -22,27 +22,38 @@ export function usePhotoshoots() {
               const projectId = id.toLowerCase();
 
               // Find project in manifest (case-insensitive)
-              const manifestProjectKey = Object.keys(manifest.projects || {}).find(
-                (k) => k.toLowerCase() === projectId
-              );
-              const projectManifest = manifestProjectKey ? manifest.projects[manifestProjectKey] : null;
+              const manifestProjectKey = Object.keys(
+                manifest.projects || {},
+              ).find((k) => k.toLowerCase() === projectId);
+              const projectManifest = manifestProjectKey
+                ? manifest.projects[manifestProjectKey]
+                : null;
 
               const ensaios: Photoshoot[] = shootkey.map((element) => {
                 // Find shoot in project manifest (case-insensitive)
-                const manifestShootKey = Object.keys(projectManifest || {}).find(
-                  (k) => k.toLowerCase() === element.shootKey.toLowerCase()
+                const manifestShootKey = Object.keys(
+                  projectManifest || {},
+                ).find(
+                  (k) => k.toLowerCase() === element.shootKey.toLowerCase(),
                 );
-                const files = manifestShootKey ? projectManifest[manifestShootKey] : [];
+                const files = manifestShootKey
+                  ? projectManifest[manifestShootKey]
+                  : [];
 
                 const image_urls = files.map((file: string) => {
-                  const normalized = file.startsWith('/') ? file.slice(1) : file;
+                  const normalized = file.startsWith('/')
+                    ? file.slice(1)
+                    : file;
                   // Use the actual manifest keys for the URL to ensure R2 path is correct
                   return `${BASE}/${manifestProjectKey}/${manifestShootKey}/${normalized}`;
                 });
 
+                const capa = `${BASE}/${manifestProjectKey}/${manifestShootKey}/${'capa.webp'}`;
+
                 return {
                   ...element,
                   image_urls,
+                  capa,
                 };
               });
 
