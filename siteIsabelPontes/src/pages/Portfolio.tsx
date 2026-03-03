@@ -174,7 +174,7 @@ export default function Portfolio() {
                       </p>
                     </div>
 
-                    <div className="grid gap-6 md:grid-cols-2">
+                    <div className="grid gap-6 sm:grid-cols-2">
                       {shoots.map((photoshoot) => {
                         const filteredPartners = (photoshoot.partners ?? [])
                           .map((id) => personsById[id])

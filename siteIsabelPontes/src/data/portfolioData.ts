@@ -25,7 +25,6 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'editorial',
     image: '/epoca/Anna_Julia/Anna_Julia_5.webp',
     photoshoots: [
-      'epoca-Nadia_Lobkov1',
       'epoca-andressa',
       'epoca-Anna_Julia',
       'epoca-GLAUCIA_OLLIE',
@@ -44,7 +43,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'direção-criativa',
     image: '/eventos/jheni e a cobra/jheni e a cobra_17.webp',
     photoshoots: [
-      'eventos-jheni_e_a_cobra',
+      'eventos-jheni_&_snake',
       'eventos-isabel',
       'eventos-mika',
       'eventos-milena',
@@ -66,15 +65,15 @@ export const portfolioProjects: PortfolioProject[] = [
       'musa_day-nadia_e_a_cobra',
     ],
   },
-  {
-    id: 'ensaios_externos',
-    title: 'Ensaios Externos',
-    description:
-      'Série de ensaios fotográficos realizados em locações externas, explorando diferentes ambientes e estilos de iluminação.',
-    category: 'editorial',
-    image: '/ensaios_externos/*',
-    photoshoots: ['ensaios_externos-MUSAS MÍSTICAS ENSAIO EXTERNO'],
-  },
+  // {
+  //   id: 'ensaios_externos',
+  //   title: 'Ensaios Externos',
+  //   description:
+  //     'Série de ensaios fotográficos realizados em locações externas, explorando diferentes ambientes e estilos de iluminação.',
+  //   category: 'editorial',
+  //   image: '/ensaios_externos/*',
+  //   photoshoots: ['ensaios_externos-MUSAS MÍSTICAS ENSAIO EXTERNO'],
+  // },
   {
     id: 'personalizados',
     title: 'Personalizados',
@@ -85,6 +84,7 @@ export const portfolioProjects: PortfolioProject[] = [
     photoshoots: [
       'personalizados-jaci',
       'personalizados-keshy',
+      'personalizados-Nadia_Lobkov1',
       'personalizados-Nadia_Lobkov2',
       'personalizados-Lara',
       'personalizados-Monica',

@@ -85,23 +85,6 @@
       ]
     },
     "epoca": {
-      "Nadia_Lobkov1": [
-        "Nadia_Lobkov1_16.webp",
-        "Nadia_Lobkov1_17.webp",
-        "Nadia_Lobkov1_18.webp",
-        "Nadia_Lobkov1_19.webp",
-        "Nadia_Lobkov1_20.webp",
-        "Nadia_Lobkov1_21.webp",
-        "Nadia_Lobkov1_22.webp",
-        "Nadia_Lobkov1_23.webp",
-        "Nadia_Lobkov1_24.webp",
-        "Nadia_Lobkov1_25.webp",
-        "Nadia_Lobkov1_26.webp",
-        "Nadia_Lobkov1_27.webp",
-        "Nadia_Lobkov1_28.webp",
-        "Nadia_Lobkov1_29.webp",
-        "Nadia_Lobkov1_30.webp"
-      ],
       "andressa": [
         "andressa_1.webp",
         "andressa_2.webp",
@@ -142,25 +125,25 @@
         "Bruna_Camargo_8.webp",
         "Bruna_Camargo_9.webp"
       ],
-      "GLAUCIA & OLLIE": [
-        "GLAUCIA & OLLIE_1.webp",
-        "GLAUCIA & OLLIE_10.webp",
-        "GLAUCIA & OLLIE_11.webp",
-        "GLAUCIA & OLLIE_12.webp",
-        "GLAUCIA & OLLIE_13.webp",
-        "GLAUCIA & OLLIE_14.webp",
-        "GLAUCIA & OLLIE_15.webp",
-        "GLAUCIA & OLLIE_16.webp",
-        "GLAUCIA & OLLIE_17.webp",
-        "GLAUCIA & OLLIE_18.webp",
-        "GLAUCIA & OLLIE_2.webp",
-        "GLAUCIA & OLLIE_3.webp",
-        "GLAUCIA & OLLIE_4.webp",
-        "GLAUCIA & OLLIE_5.webp",
-        "GLAUCIA & OLLIE_6.webp",
-        "GLAUCIA & OLLIE_7.webp",
-        "GLAUCIA & OLLIE_8.webp",
-        "GLAUCIA & OLLIE_9.webp"
+      "GLAUCIA_OLLIE": [
+        "GLAUCIA_OLLIE_1.webp",
+        "GLAUCIA_OLLIE_10.webp",
+        "GLAUCIA_OLLIE_11.webp",
+        "GLAUCIA_OLLIE_12.webp",
+        "GLAUCIA_OLLIE_13.webp",
+        "GLAUCIA_OLLIE_14.webp",
+        "GLAUCIA_OLLIE_15.webp",
+        "GLAUCIA_OLLIE_16.webp",
+        "GLAUCIA_OLLIE_17.webp",
+        "GLAUCIA_OLLIE_18.webp",
+        "GLAUCIA_OLLIE_2.webp",
+        "GLAUCIA_OLLIE_3.webp",
+        "GLAUCIA_OLLIE_4.webp",
+        "GLAUCIA_OLLIE_5.webp",
+        "GLAUCIA_OLLIE_6.webp",
+        "GLAUCIA_OLLIE_7.webp",
+        "GLAUCIA_OLLIE_8.webp",
+        "GLAUCIA_OLLIE_9.webp"
       ],
       "Hayanna": [
         "Hayanna_1.webp",
@@ -384,22 +367,33 @@
         "jheni e a cobra_97.webp",
         "jheni e a cobra_98.webp",
         "jheni e a cobra_99.webp"
+      ],
+      "jheni_&_snake": [
+        "jheni_&_snake_8.webp",
+        "jheni_&_snake_9.webp",
+        "jheni_&_snake_10.webp",
+        "jheni_&_snake_60.webp",
+        "jheni_&_snake_61.webp",
+        "jheni_&_snake_69.webp",
+        "jheni_&_snake_7.webp",
+        "jheni_&_snake_8.webp",
+        "jheni_&_snake_9.webp"
       ]
     },
     "musa_day": {
-      "Andressa e a cobra": [
-        "Andressa e a cobra_1.webp",
-        "Andressa e a cobra_10.webp",
-        "Andressa e a cobra_11.webp",
-        "Andressa e a cobra_12.webp",
-        "Andressa e a cobra_2.webp",
-        "Andressa e a cobra_3.webp",
-        "Andressa e a cobra_4.webp",
-        "Andressa e a cobra_5.webp",
-        "Andressa e a cobra_6.webp",
-        "Andressa e a cobra_7.webp",
-        "Andressa e a cobra_8.webp",
-        "Andressa e a cobra_9.webp"
+      "Andressa_e_a_cobra": [
+        "Andressa_e_a_cobra_1.webp",
+        "Andressa_e_a_cobra_10.webp",
+        "Andressa_e_a_cobra_11.webp",
+        "Andressa_e_a_cobra_12.webp",
+        "Andressa_e_a_cobra_2.webp",
+        "Andressa_e_a_cobra_3.webp",
+        "Andressa_e_a_cobra_4.webp",
+        "Andressa_e_a_cobra_5.webp",
+        "Andressa_e_a_cobra_6.webp",
+        "Andressa_e_a_cobra_7.webp",
+        "Andressa_e_a_cobra_8.webp",
+        "Andressa_e_a_cobra_9.webp"
       ],
       "Daiara": [
         "Daiara_1.webp",
@@ -410,55 +404,55 @@
         "Daiara_6.webp",
         "Daiara_7.webp"
       ],
-      "Monica e a coruja": [
-        "Monica e a coruja_1.webp",
-        "Monica e a coruja_10.webp",
-        "Monica e a coruja_11.webp",
-        "Monica e a coruja_12.webp",
-        "Monica e a coruja_13.webp",
-        "Monica e a coruja_14.webp",
-        "Monica e a coruja_15.webp",
-        "Monica e a coruja_2.webp",
-        "Monica e a coruja_3.webp",
-        "Monica e a coruja_4.webp",
-        "Monica e a coruja_5.webp",
-        "Monica e a coruja_6.webp",
-        "Monica e a coruja_7.webp",
-        "Monica e a coruja_8.webp",
-        "Monica e a coruja_9.webp"
+      "Monica_e_a_coruja": [
+        "Monica_e_a_coruja_1.webp",
+        "Monica_e_a_coruja_10.webp",
+        "Monica_e_a_coruja_11.webp",
+        "Monica_e_a_coruja_12.webp",
+        "Monica_e_a_coruja_13.webp",
+        "Monica_e_a_coruja_14.webp",
+        "Monica_e_a_coruja_15.webp",
+        "Monica_e_a_coruja_2.webp",
+        "Monica_e_a_coruja_3.webp",
+        "Monica_e_a_coruja_4.webp",
+        "Monica_e_a_coruja_5.webp",
+        "Monica_e_a_coruja_6.webp",
+        "Monica_e_a_coruja_7.webp",
+        "Monica_e_a_coruja_8.webp",
+        "Monica_e_a_coruja_9.webp"
       ],
-      "nadia e a cobra": [
-        "nadia e a cobra_1.webp",
-        "nadia e a cobra_10.webp",
-        "nadia e a cobra_11.webp",
-        "nadia e a cobra_12.webp",
-        "nadia e a cobra_13.webp",
-        "nadia e a cobra_14.webp",
-        "nadia e a cobra_2.webp",
-        "nadia e a cobra_3.webp",
-        "nadia e a cobra_4.webp",
-        "nadia e a cobra_5.webp",
-        "nadia e a cobra_6.webp",
-        "nadia e a cobra_7.webp",
-        "nadia e a cobra_8.webp",
-        "nadia e a cobra_9.webp"
+      "nadia_e_a_cobra": [
+        "nadia_e_a_cobra_1.webp",
+        "nadia_e_a_cobra_10.webp",
+        "nadia_e_a_cobra_11.webp",
+        "nadia_e_a_cobra_12.webp",
+        "nadia_e_a_cobra_13.webp",
+        "nadia_e_a_cobra_14.webp",
+        "nadia_e_a_cobra_2.webp",
+        "nadia_e_a_cobra_3.webp",
+        "nadia_e_a_cobra_4.webp",
+        "nadia_e_a_cobra_5.webp",
+        "nadia_e_a_cobra_6.webp",
+        "nadia_e_a_cobra_7.webp",
+        "nadia_e_a_cobra_8.webp",
+        "nadia_e_a_cobra_9.webp"
       ]
     },
     "ensaios_externos": {
       "Malu": ["Malu_1.webp"]
     },
     "personalizados": {
-      "Bella de Moraes": [
-        "Bella de Moraes_1.webp",
-        "Bella de Moraes_10.webp",
-        "Bella de Moraes_2.webp",
-        "Bella de Moraes_3.webp",
-        "Bella de Moraes_4.webp",
-        "Bella de Moraes_5.webp",
-        "Bella de Moraes_6.webp",
-        "Bella de Moraes_7.webp",
-        "Bella de Moraes_8.webp",
-        "Bella de Moraes_9.webp"
+      "Bella_de_Moraes": [
+        "Bella_de_Moraes_1.webp",
+        "Bella_de_Moraes_10.webp",
+        "Bella_de_Moraes_2.webp",
+        "Bella_de_Moraes_3.webp",
+        "Bella_de_Moraes_4.webp",
+        "Bella_de_Moraes_5.webp",
+        "Bella_de_Moraes_6.webp",
+        "Bella_de_Moraes_7.webp",
+        "Bella_de_Moraes_8.webp",
+        "Bella_de_Moraes_9.webp"
       ],
       "jaci": [
         "jaci_1.webp",
@@ -515,6 +509,23 @@
         "keshy_7.webp",
         "keshy_8.webp",
         "keshy_9.webp"
+      ],
+      "Nadia_Lobkov1": [
+        "Nadia_Lobkov1_1.webp",
+        "Nadia_Lobkov1_2.webp",
+        "Nadia_Lobkov1_3.webp",
+        "Nadia_Lobkov1_4.webp",
+        "Nadia_Lobkov1_5.webp",
+        "Nadia_Lobkov1_6.webp",
+        "Nadia_Lobkov1_7.webp",
+        "Nadia_Lobkov1_8.webp",
+        "Nadia_Lobkov1_9.webp",
+        "Nadia_Lobkov1_10.webp",
+        "Nadia_Lobkov1_11.webp",
+        "Nadia_Lobkov1_12.webp",
+        "Nadia_Lobkov1_13.webp",
+        "Nadia_Lobkov1_14.webp",
+        "Nadia_Lobkov1_15.webp"
       ],
       "Nadia_Lobkov2": [
         "Nadia_Lobkov2_1.webp",
