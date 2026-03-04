@@ -55,14 +55,6 @@ export function usePhotoshoots() {
                     .filter(Boolean)
                     .map((p) => enc(String(p).replace(/^\/+|\/+$/g, ''))) // tira / no começo/fim
                     .join('/');
-
-                console.log('Manifest keys:', {
-                  manifestProjectKey,
-                  manifestShootKey,
-                });
-                console.log(
-                  `${BASE}/${joinR2(manifestProjectKey, manifestShootKey, 'capa.webp')}`,
-                );
                 const capa = `${BASE}/${joinR2(manifestProjectKey, manifestShootKey, 'capa.webp')}`;
                 return {
                   ...element,

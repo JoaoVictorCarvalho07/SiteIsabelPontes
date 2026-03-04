@@ -46,7 +46,6 @@ export default function Portfolio() {
     });
   }, [filteredProjects, shootsMap]);
 
-  console.log('shootsMap:', shootsMap);
 
   // ✅ acha o photoshoot sele  cionado (procura em todos os projetos)
   const selectedShoot = useMemo(() => {
@@ -58,7 +57,6 @@ export default function Portfolio() {
     return null;
   }, [selectedPhotoshootId, shootsMap]);
 
-  console.log('Resolved Projects:', resolvedProjects);
 
   return (
     <>
