@@ -21,19 +21,23 @@ export function PhotoshootCard({
   onImageClick,
 }: PhotoshootCardProps) {
   const [showDetails, setShowDetails] = useState(false);
+  const images = photoshoot.images || photoshoot.image_urls || [];
+  const helpers = photoshoot.helpers || [];
 
   return (
     <Card className="overflow-hidden rounded-2xl border-none bg-white shadow-md transition-all hover:shadow-lg">
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden bg-gray-300">
-        <img
-          src={photoshoot.capa || '/placeholder.jpg'}
-          loading="lazy"
-          decoding="async"
-          alt={photoshoot.title}
-          className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
-          onClick={onImageClick}
-        />
+        {images.length > 0 && (
+          <img
+            src={images[0]}
+            loading="lazy"
+            decoding="async"
+            alt={photoshoot.title}
+            className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
+            onClick={onImageClick}
+          />
+        )}
       </div>
 
       {/* Content Section */}
@@ -48,8 +52,10 @@ export function PhotoshootCard({
         </div>
 
         <p className="text-sm text-gray-600">
-          {new Date(photoshoot.date).toLocaleDateString('pt-BR')} •{' '}
-          {photoshoot.location}
+          {typeof photoshoot.date === 'string'
+            ? new Date(photoshoot.date).toLocaleDateString('pt-BR')
+            : photoshoot.date.toLocaleDateString('pt-BR')}{' '}
+          • {photoshoot.location}
         </p>
 
         <p className="mt-3 text-gray-700">{photoshoot.description}</p>
@@ -69,14 +75,10 @@ export function PhotoshootCard({
               <p className="text-xs font-semibold uppercase text-gray-600">
                 Modelos
               </p>
-              <div className="mt-2 flex flex-wrap gap-2 text-black ">
-                {models.map((model) => {
-                  return (
-                    <Link to={`/parceiros/${model.id}`}>
-                      <TeamMemberTag key={model.id} member={model} />;
-                    </Link>
-                  );
-                })}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {photoshoot.models.map((model: any) => (
+                  <TeamMemberTag key={model.id} member={model} />
+                ))}
               </div>
             </div>
           )}
@@ -87,10 +89,11 @@ export function PhotoshootCard({
               <p className="text-xs font-semibold uppercase text-gray-600">
                 Equipe
               </p>
-
-              {helpers.map((helper) => {
-                return <TeamMemberTag key={helper.id} member={helper} />;
-              })}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {helpers.map((helper) => (
+                  <TeamMemberTag key={helper.id} member={helper} />
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -110,24 +113,23 @@ export function PhotoshootCard({
               <div>
                 <h4 className="mb-3 font-semibold text-black">Modelos</h4>
                 <div className="space-y-2">
-                  {models.length > 0 &&
-                    models.map((model) => {
-                      return <TeamMemberDetail key={model.id} member={model} />;
-                    })}
+                  {photoshoot.models.map((model: any) => (
+                    <TeamMemberDetail key={model.id} member={model} />
+                  ))}
                 </div>
               </div>
             )}
 
-            {partners.length > 0 && (
+            {helpers.length > 0 && (
               <div>
                 <h4 className="mb-3 font-semibold text-black">
                   Equipe de Suporte
                 </h4>
 
                 <div className="space-y-2">
-                  {partners.map((helper) => {
-                    return <TeamMemberDetail key={helper.id} member={helper} />;
-                  })}
+                  {helpers.map((helper) => (
+                    <TeamMemberDetail key={helper.id} member={helper} />
+                  ))}
                 </div>
 
                 {/* <div className="space-y-2">
@@ -146,7 +148,7 @@ export function PhotoshootCard({
   );
 }
 
-function TeamMemberTag({ member }: { member: Person }) {
+function TeamMemberTag({ member }: { member: any }) {
   return (
     <Link
       to={`/partners#${member.id}`}
@@ -160,8 +162,8 @@ function TeamMemberTag({ member }: { member: Person }) {
   );
 }
 
-function TeamMemberDetail({ member }: { member: Person }) {
-  const roleLabels: Record<Exclude<Person['role'], undefined>, string> = {
+function TeamMemberDetail({ member }: { member: any }) {
+  const roleLabels: Record<string, string> = {
     model: 'Modelo',
     stylist: 'Stylist',
     makeup: 'Maquiagem',

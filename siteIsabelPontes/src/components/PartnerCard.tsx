@@ -73,5 +73,5 @@ function getCategoryLabel(category: Person['category']): string {
     brands: 'Marcas',
     makeup: 'Maquiagem & Cabelo',
   };
-  return labels[category];
+  return category ? labels[category] : 'Parceiro';
 }

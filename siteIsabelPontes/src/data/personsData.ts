@@ -30,33 +30,6 @@ export const partners: Person[] = [
     role: 'photographer',
     category: 'models',
   },
-  {
-    id: 'tallyta',
-    name: 'Tallyta',
-    image: '/cards/Tallyta.jpg',
-    description: 'Modelo profissional',
-    instagram: undefined,
-    role: 'model',
-    category: 'models',
-  },
-  {
-    id: 'mika',
-    name: 'Mika',
-    image: '/cards/Mika.jpg',
-    description: 'Modelo criativa',
-    instagram: undefined,
-    role: 'model',
-    category: 'models',
-  },
-  {
-    id: 'paty-anie',
-    name: 'Paty Anie',
-    image: '/cards/Paty_Anie.jpg',
-    description: 'Modelo e artista',
-    instagram: undefined,
-    role: 'model',
-    category: 'models',
-  },
 ];
 
 export const personsById: Record<string, Person> = Object.fromEntries(

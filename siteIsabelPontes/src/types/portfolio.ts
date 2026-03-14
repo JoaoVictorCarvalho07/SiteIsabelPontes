@@ -1,3 +1,6 @@
+import type { Photoshoot } from '@/types/photoshoot';
+import type { TeamMember } from '@/types/teamMember';
+
 export type ProjectCategory =
   | 'all'
   | 'editorial'
@@ -14,3 +17,5 @@ export interface PortfolioProject {
   image: string; // capa do projeto
   photoshoots: string[]; // ids dos photoshoots
 }
+
+export type { Photoshoot, TeamMember };
