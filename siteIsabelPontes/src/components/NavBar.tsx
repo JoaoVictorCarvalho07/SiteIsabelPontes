@@ -20,10 +20,9 @@ export default function Navbar() {
     const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     const onChange = () => {
-      console.log('sistema mudou para:', mediaDark.matches ? 'dark' : 'light');
       setLogoSrc(
         !isDarkThemePage
-          ? '/logo/logo_isabel_branca.png'
+          ? '/logo/logo_isabel_branca.png'  
           : mediaDark.matches
             ? '/logo/logo_isabel_branca.png'
             : '/logo/logo_isabel2.png',

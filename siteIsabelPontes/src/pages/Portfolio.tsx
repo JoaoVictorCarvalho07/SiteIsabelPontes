@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { portfolioProjects } from '@/data/portfolioData';
+import { usePhotoshoots } from '@/hooks/usePhotoshoots';
 import { PhotoshootCard } from '@/components/PhotoshootCard';
 import { Button } from '@/components/ui/button';
 import type { ProjectCategory } from '@/types/portfolio';
 import { CarouselSpacing } from '@/components/CarouselSpacing';
 import { cn } from '@/lib/utils';
 import { Modal } from '@/components/Modal';
+import type { Person } from '@/types/person';
+import { personsById } from '@/data/personsData';
 
 const categoryLabels: Record<string, string> = {
   all: 'Todos',
@@ -13,12 +16,14 @@ const categoryLabels: Record<string, string> = {
   'direção-criativa': 'Direção Criativa',
   'mídia-kit': 'Mídia Kit',
   conceitual: 'Conceitual',
-  independentes: 'Independentes',
+  personalizados: 'Personalizados',
 };
 
-
 export default function Portfolio() {
-  const [photoshootIndex, setPhotoshootIndex] = useState<string | null>('');
+  const { data: shootsMap, loading, error } = usePhotoshoots();
+  const [selectedPhotoshootId, setSelectedPhotoshootId] = useState<
+    string | null
+  >(null);
   const [visible, setVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] =
     useState<ProjectCategory>('all');
@@ -27,9 +32,31 @@ export default function Portfolio() {
   const filteredProjects =
     selectedCategory === 'all'
       ? portfolioProjects
-      : selectedCategory === 'independentes'
-        ? portfolioProjects.filter((p: any) => p.id === 'independentes')
-        : portfolioProjects.filter((p: any) => p.category === selectedCategory);
+      : selectedCategory === 'personalizados'
+        ? portfolioProjects.filter((p) => p.id === 'personalizados')
+        : portfolioProjects.filter((p) => p.category === selectedCategory);
+
+  // ✅ resolve projects -> shoots (usando a key do projeto)
+  // Como você disse: o id do projeto = nome da pasta do projeto (key no map)
+  const resolvedProjects = useMemo(() => {
+    return filteredProjects.map((project) => {
+      const shoots = shootsMap[project.id] ?? shootsMap[project.title] ?? [];
+      // ^ fallback: se sua key estiver como title (Afrodite) e seu id for slug (afrodite)
+      return { project, shoots };
+    });
+  }, [filteredProjects, shootsMap]);
+
+
+  // ✅ acha o photoshoot sele  cionado (procura em todos os projetos)
+  const selectedShoot = useMemo(() => {
+    if (!selectedPhotoshootId) return null;
+    for (const key in shootsMap) {
+      const found = shootsMap[key]?.find((s) => s.id === selectedPhotoshootId);
+      if (found) return found;
+    }
+    return null;
+  }, [selectedPhotoshootId, shootsMap]);
+
 
   return (
     <>
@@ -66,6 +93,23 @@ export default function Portfolio() {
 
         {/* Content */}
         <section className="mx-auto max-w-6xl px-6 py-16">
+          {loading && (
+            <div className="flex h-32 items-center justify-center">
+              <p className="text-lg text-gray-600 animate-pulse">
+                Carregando projetos...
+              </p>
+            </div>
+          )}
+
+          {error && (
+            <div className="flex h-32 items-center justify-center">
+              <p className="text-lg text-destructive">
+                Erro ao carregar projetos. Por favor, tente novamente mais
+                tarde.
+              </p>
+            </div>
+          )}
+
           {/* Category Filter */}
           <div className="mb-12 flex flex-wrap gap-3">
             {Object.entries(categoryLabels).map(([key, label]) => (
@@ -83,9 +127,9 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Projects Grid */}
+          {/* Projects */}
           <div className="space-y-16">
-            {filteredProjects.map((project: any) => (
+            {resolvedProjects.map(({ project, shoots }) => (
               <div key={project.id} className="border-b pb-16 last:border-b-0">
                 {/* Project Header */}
                 <div className="mb-8">
@@ -99,28 +143,28 @@ export default function Portfolio() {
                       </p>
                     </div>
                   </div>
-                  <p className="mt-4 max-w-2xl text-lg text-gray-700">
+                  <p className="mt-4 max-w-2xl text-lg text-foreground">
                     {project.description}
                   </p>
                 </div>
 
                 {/* Project Image */}
-                {selectedCategory !== 'independentes' && (
-                  <div className="mb-8 h-60 sm:h-80 md:h-120 overflow-hidden rounded-2xl bg-gray-300">
+                {selectedCategory !== 'personalizados' && (
+                  <div className="mb-8 h-80 sm:h-100 md:h-120 overflow-hidden rounded-2xl bg-gray-300 ">
                     <img
-                      src={project.image}
+                      src={shoots[0]?.image_urls?.[0] || project.image}
                       alt={project.title}
-                      className="h-full w-full object-cover transition-transform hover:scale-105 "
+                      className="h-full w-full object-cover transition-transform hover:scale-105 object-[80%_20%]"
                     />
                   </div>
                 )}
 
-                {/* Photoshoots Section */}
-                {project.photoshoots.length > 0 && (
+                {/* Photoshoots */}
+                {shoots.length > 0 && (
                   <div>
                     <div className="mb-8">
                       <h3 className="text-2xl font-bold text-foreground">
-                        Fotosessões ({project.photoshoots.length})
+                        Fotosessões ({shoots.length})
                       </h3>
                       <p className="mt-2 text-gray-600">
                         Conheça os detalhes de cada sessão, modelos e equipe de
@@ -128,25 +172,40 @@ export default function Portfolio() {
                       </p>
                     </div>
 
-                    <div className="grid gap-6 md:grid-cols-2">
-                      {project.photoshoots.map((photoshoot: any) => (
-                        <PhotoshootCard
-                          key={photoshoot.id}
-                          photoshoot={photoshoot}
-                          onImageClick={() => {
-                            console.log('Fotoshoot clicado:', photoshoot.id);
-                            setVisible(true);
-                            setPhotoshootIndex(photoshoot.id);
-                            console.log('Fotoshoot clicado:', photoshoot.id);
-                          }}
-                        />
-                      ))}
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      {shoots.map((photoshoot) => {
+                        const filteredPartners = (photoshoot.partners ?? [])
+                          .map((id) => personsById[id])
+                          .filter((p): p is Person => !!p);
+
+                        const models = (photoshoot.models ?? [])
+                          .map((id) => personsById[id])
+                          .filter((p): p is Person => !!p);
+
+                        const helpers = (photoshoot.teamMembers ?? [])
+                          .map((id) => personsById[id])
+                          .filter((p): p is Person => !!p);
+
+                        return (
+                          <PhotoshootCard
+                            partners={filteredPartners}
+                            models={models}
+                            helpers={helpers}
+                            key={photoshoot.id}
+                            photoshoot={photoshoot}
+                            onImageClick={() => {
+                              setVisible(true);
+                              setSelectedPhotoshootId(photoshoot.id);
+                            }}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
                 )}
 
-                {/* Expand Button for More Info */}
-                {project.photoshoots.length > 0 && (
+                {/* Expand */}
+                {shoots.length > 0 && (
                   <div className="mt-8">
                     <button
                       onClick={() =>
@@ -168,16 +227,15 @@ export default function Portfolio() {
                             Total de Pessoas Envolvidas
                           </h4>
                           <p className="text-gray-700">
-                            Modelos:{' '}
-                            {project.photoshoots.reduce(
-                              (acc: number, p: any) => acc + p.models.length,
+                            {shoots.reduce(
+                              (acc, s) => acc + (s.models?.length ?? 0),
                               0,
                             )}
                           </p>
                           <p className="text-gray-700">
                             Equipe:{' '}
-                            {project.photoshoots.reduce(
-                              (acc: number, p: any) => acc + p.helpers.length,
+                            {shoots.reduce(
+                              (acc, s) => acc + (s.teamMembers?.length ?? 0),
                               0,
                             )}
                           </p>
@@ -200,7 +258,7 @@ export default function Portfolio() {
           )}
         </section>
 
-        {/* Call to Action */}
+        {/* CTA */}
         <section className="bg-black py-16">
           <div className="mx-auto max-w-2xl px-6 text-center">
             <h2 className="text-3xl font-bold text-white">
@@ -218,38 +276,23 @@ export default function Portfolio() {
           </div>
         </section>
       </main>
-      <Modal open={visible} onClose={() => setVisible(false)}>
+
+      {/* Modal */}
+      <Modal
+        open={visible}
+        onClose={() => {
+          setVisible(false);
+          setSelectedPhotoshootId(null);
+        }}
+      >
         <CarouselSpacing
           gridof={true}
-          className={cn(
-            'max-w-full z-500 bg-',
-            visible ? 'visible' : 'invisible',
-          )}
+          className={cn('max-w-full z-500', visible ? 'visible' : 'invisible')}
           items={
-            portfolioProjects
-              .filter((project: any) =>
-                project.photoshoots.some((p: any) => p.id === photoshootIndex),
-              )[0]
-              ?.photoshoots.find((p: any) => p.id === photoshootIndex)
-              ? (
-                  (
-                    portfolioProjects
-                      .filter((project: any) =>
-                        project.photoshoots.some((p: any) => p.id === photoshootIndex),
-                      )[0]?.photoshoots.find((p: any) => p.id === photoshootIndex) as any
-                  )?.images ||
-                  (
-                    portfolioProjects
-                      .filter((project: any) =>
-                        project.photoshoots.some((p: any) => p.id === photoshootIndex),
-                      )[0]?.photoshoots.find((p: any) => p.id === photoshootIndex) as any
-                  )?.image_urls ||
-                  []
-                ).map((src: any, index: any) => ({
-                  src,
-                  alt: `Foto da sessão ${index + 1}`,
-                }))
-              : []
+            selectedShoot?.image_urls?.map((src, index) => ({
+              src,
+              alt: `Foto da sessão ${index + 1}`,
+            })) || []
           }
         />
       </Modal>

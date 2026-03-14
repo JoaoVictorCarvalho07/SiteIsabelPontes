@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { partners } from '@/data/partners';
+import { partners } from '@/data/personsData';
 import { PartnerCard } from '@/components/PartnerCard';
-import type { PartnerCategory } from '@/types/partner';
+import type { PersonCategory } from '@/types/person';
+import type { Person } from '@/types/person';
 
-const categoryLabels: Record<PartnerCategory, string> = {
+const categoryLabels: Record<PersonCategory, string> = {
   models: 'Modelos',
   agências: 'Agências',
   stylists: 'Stylists',
@@ -11,15 +12,15 @@ const categoryLabels: Record<PartnerCategory, string> = {
   makeup: 'Maquiagem & Cabelo',
 };
 
-export default function Partners() {
+export default function Partners({ partner }: { partner?: Person }) {
   const [selectedCategory, setSelectedCategory] =
-    useState<PartnerCategory | null>(null);
+    useState<PersonCategory | null>(null);
 
   const filteredPartners = selectedCategory
     ? partners.filter((p) => p.category === selectedCategory)
     : partners;
 
-  const categories: PartnerCategory[] = [
+  const categories: PersonCategory[] = [
     'models',
     'agências',
     'stylists',
@@ -98,7 +99,10 @@ export default function Partners() {
         )}
 
         {/* Partners Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          id={partner?.id}
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
           {filteredPartners.map((partner) => (
             <PartnerCard key={partner.id} partner={partner} />
           ))}
@@ -150,11 +154,9 @@ export default function Partners() {
                     />
                     <div>
                       <h3 className="font-bold text-black">{partner.name}</h3>
-                      {partner.category && (
-                        <p className="text-sm text-gray-600">
-                          {categoryLabels[partner.category]}
-                        </p>
-                      )}
+                      <p className="text-sm text-gray-600">
+                        {partner.category ? categoryLabels[partner.category] : ''}
+                      </p>
                     </div>
                   </div>
                   <blockquote className="border-l-4 border-black pl-4 italic text-gray-800">

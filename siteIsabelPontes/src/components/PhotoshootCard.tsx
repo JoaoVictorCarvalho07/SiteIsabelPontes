@@ -1,13 +1,22 @@
 import { useState } from 'react';
-import type { Photoshoot, TeamMember } from '@/types/portfolio';
 import { Card } from '@/components/ui/card';
+import type { Photoshoot } from '@/types/photoshoot';
+import type { Person } from '@/types/person';
+import { Link } from 'react-router';
 
 interface PhotoshootCardProps {
-  photoshoot: Photoshoot & { images?: string[]; helpers?: TeamMember[] };
+  photoshoot: Photoshoot;
+  partners: Person[];
+  models: Person[];
+  helpers: Person[];
+  // Lista completa de parceiros para buscar os detalhes
   onImageClick?: () => void; // Callback para quando a imagem for clicada
 }
 
 export function PhotoshootCard({
+  partners,
+  models,
+  helpers,
   photoshoot,
   onImageClick,
 }: PhotoshootCardProps) {
@@ -116,11 +125,20 @@ export function PhotoshootCard({
                 <h4 className="mb-3 font-semibold text-black">
                   Equipe de Suporte
                 </h4>
+
                 <div className="space-y-2">
                   {helpers.map((helper) => (
                     <TeamMemberDetail key={helper.id} member={helper} />
                   ))}
                 </div>
+
+                {/* <div className="space-y-2">
+                    {photoshoot.teamMembers.map((helper) => {
+                      const person = partners.find((p) => p.id === helper);
+                      if (!person) return null;
+                      return <TeamMemberDetail key={helper} member={person} />;
+                    })}
+                  </div> */}
               </div>
             )}
           </div>
@@ -132,15 +150,15 @@ export function PhotoshootCard({
 
 function TeamMemberTag({ member }: { member: any }) {
   return (
-    <a
-      href={member.instagram || '#'}
+    <Link
+      to={`/partners#${member.id}`}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800 transition-all hover:bg-black hover:text-white"
     >
       <span>{member.name}</span>
       <span className="text-xs opacity-75">({member.role})</span>
-    </a>
+    </Link>
   );
 }
 
@@ -158,7 +176,9 @@ function TeamMemberDetail({ member }: { member: any }) {
     <div className="flex items-start justify-between rounded-lg bg-gray-50 p-3">
       <div>
         <p className="font-medium text-black">{member.name}</p>
-        <p className="text-xs text-gray-600">{roleLabels[member.role]}</p>
+        <p className="text-xs text-gray-600">
+          {member.role ? roleLabels[member.role] : ''}
+        </p>
       </div>
       <div className="flex gap-2">
         {member.instagram && (
@@ -171,9 +191,9 @@ function TeamMemberDetail({ member }: { member: any }) {
             IG
           </a>
         )}
-        {member.portfolio && (
+        {member.website && (
           <a
-            href={member.portfolio}
+            href={member.website}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-semibold text-black hover:underline"

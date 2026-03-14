@@ -1,9 +1,12 @@
-import type { Person, PersonCategory } from '@/types/person';
+export type PartnerCategory = 'models' | 'agências' | 'stylists' | 'brands' | 'makeup';
 
-export type PartnerCategory = PersonCategory;
-
-export type Partner = Person & {
+export interface Partner {
+  id: string;
+  name: string;
+  category: PartnerCategory;
+  image: string;
+  description: string;
+  instagram?: string;
+  website?: string;
   testimonial?: string;
-};
-
-export type PartnerInput = Omit<Partner, 'id'>;
+}

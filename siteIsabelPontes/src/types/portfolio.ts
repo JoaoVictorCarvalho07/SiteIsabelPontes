@@ -7,7 +7,7 @@ export type ProjectCategory =
   | 'direção-criativa'
   | 'mídia-kit'
   | 'conceitual'
-  | 'independentes';
+  | 'personalizados';
 
 export interface PortfolioProject {
   id: string; // ex: "afrodite"
