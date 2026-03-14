@@ -9,6 +9,7 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Partners from './pages/Partners';
 import NotFound from './pages/NotFound';
+import PhotoGallery from './pages/PhotoGallery';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/sobre" element={<SobreMim />} />
         <Route path="/contato" element={<ContactSection />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/galeria" element={<PhotoGallery />} />
       </Routes>
     </BrowserRouter>
   );
