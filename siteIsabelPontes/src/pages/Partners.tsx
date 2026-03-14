@@ -150,9 +150,11 @@ export default function Partners() {
                     />
                     <div>
                       <h3 className="font-bold text-black">{partner.name}</h3>
-                      <p className="text-sm text-gray-600">
-                        {categoryLabels[partner.category]}
-                      </p>
+                      {partner.category && (
+                        <p className="text-sm text-gray-600">
+                          {categoryLabels[partner.category]}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <blockquote className="border-l-4 border-black pl-4 italic text-gray-800">

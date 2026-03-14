@@ -1,10 +1,6 @@
-import type { person } from '@/types/person';
 import type { Partner } from '@/types/partner';
-import type { Model } from '@/types/model';
-import type { TeamMember } from '@/types/teamMember';
 
-
-export const partners: Model[] = [
+export const partners: Partner[] = [
   {
     id: 'milena-silva',
     name: 'Milena Silva',
@@ -13,8 +9,5 @@ export const partners: Model[] = [
       'Modelo profissional com experiência em editorials conceituais',
     instagram: '@milenasilvaa',
     testimonial: 'Trabalhar com Isabel é uma experiência transformadora...',
-  },
-  {
-    
   },
 ];

@@ -10,8 +10,6 @@ import './App.css';
 // import Partners from './pages/Partners';
 // import NotFound from './pages/NotFound';
 
-import shoots_raw from './data/shoots_raw';
-
 function App() {
   // return (
   //   <BrowserRouter>
@@ -28,6 +26,7 @@ function App() {
   //     </Routes>
   //   </BrowserRouter>
   // );
+  return null;
 }
 
 export default App;

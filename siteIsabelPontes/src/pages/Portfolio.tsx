@@ -28,8 +28,8 @@ export default function Portfolio() {
     selectedCategory === 'all'
       ? portfolioProjects
       : selectedCategory === 'independentes'
-        ? portfolioProjects.filter((p) => p.id === 'independentes')
-        : portfolioProjects.filter((p) => p.category === selectedCategory);
+        ? portfolioProjects.filter((p: any) => p.id === 'independentes')
+        : portfolioProjects.filter((p: any) => p.category === selectedCategory);
 
   return (
     <>
@@ -85,7 +85,7 @@ export default function Portfolio() {
 
           {/* Projects Grid */}
           <div className="space-y-16">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project: any) => (
               <div key={project.id} className="border-b pb-16 last:border-b-0">
                 {/* Project Header */}
                 <div className="mb-8">
@@ -129,7 +129,7 @@ export default function Portfolio() {
                     </div>
 
                     <div className="grid gap-6 md:grid-cols-2">
-                      {project.photoshoots.map((photoshoot) => (
+                      {project.photoshoots.map((photoshoot: any) => (
                         <PhotoshootCard
                           key={photoshoot.id}
                           photoshoot={photoshoot}
@@ -170,14 +170,14 @@ export default function Portfolio() {
                           <p className="text-gray-700">
                             Modelos:{' '}
                             {project.photoshoots.reduce(
-                              (acc, p) => acc + p.models.length,
+                              (acc: number, p: any) => acc + p.models.length,
                               0,
                             )}
                           </p>
                           <p className="text-gray-700">
                             Equipe:{' '}
                             {project.photoshoots.reduce(
-                              (acc, p) => acc + p.helpers.length,
+                              (acc: number, p: any) => acc + p.helpers.length,
                               0,
                             )}
                           </p>
@@ -227,14 +227,29 @@ export default function Portfolio() {
           )}
           items={
             portfolioProjects
-              .filter((project) =>
-                project.photoshoots.some((p) => p.id === photoshootIndex),
+              .filter((project: any) =>
+                project.photoshoots.some((p: any) => p.id === photoshootIndex),
               )[0]
-              ?.photoshoots.find((p) => p.id === photoshootIndex)
-              ?.images.map((src, index) => ({
-                src,
-                alt: `Foto da sessão ${index + 1}`,
-              })) || []
+              ?.photoshoots.find((p: any) => p.id === photoshootIndex)
+              ? (
+                  (
+                    portfolioProjects
+                      .filter((project: any) =>
+                        project.photoshoots.some((p: any) => p.id === photoshootIndex),
+                      )[0]?.photoshoots.find((p: any) => p.id === photoshootIndex) as any
+                  )?.images ||
+                  (
+                    portfolioProjects
+                      .filter((project: any) =>
+                        project.photoshoots.some((p: any) => p.id === photoshootIndex),
+                      )[0]?.photoshoots.find((p: any) => p.id === photoshootIndex) as any
+                  )?.image_urls ||
+                  []
+                ).map((src: any, index: any) => ({
+                  src,
+                  alt: `Foto da sessão ${index + 1}`,
+                }))
+              : []
           }
         />
       </Modal>

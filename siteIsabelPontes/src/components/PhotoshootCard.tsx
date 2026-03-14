@@ -3,7 +3,7 @@ import type { Photoshoot, TeamMember } from '@/types/portfolio';
 import { Card } from '@/components/ui/card';
 
 interface PhotoshootCardProps {
-  photoshoot: Photoshoot;
+  photoshoot: Photoshoot & { images?: string[]; helpers?: TeamMember[] };
   onImageClick?: () => void; // Callback para quando a imagem for clicada
 }
 
@@ -12,19 +12,23 @@ export function PhotoshootCard({
   onImageClick,
 }: PhotoshootCardProps) {
   const [showDetails, setShowDetails] = useState(false);
+  const images = photoshoot.images || photoshoot.image_urls || [];
+  const helpers = photoshoot.helpers || [];
 
   return (
     <Card className="overflow-hidden rounded-2xl border-none bg-white shadow-md transition-all hover:shadow-lg">
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden bg-gray-300">
-        <img
-          src={photoshoot.images[0]}
-          loading="lazy"
-          decoding="async"
-          alt={photoshoot.title}
-          className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
-          onClick={onImageClick}
-        />
+        {images.length > 0 && (
+          <img
+            src={images[0]}
+            loading="lazy"
+            decoding="async"
+            alt={photoshoot.title}
+            className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
+            onClick={onImageClick}
+          />
+        )}
       </div>
 
       {/* Content Section */}
@@ -39,8 +43,10 @@ export function PhotoshootCard({
         </div>
 
         <p className="text-sm text-gray-600">
-          {new Date(photoshoot.date).toLocaleDateString('pt-BR')} •{' '}
-          {photoshoot.location}
+          {typeof photoshoot.date === 'string'
+            ? new Date(photoshoot.date).toLocaleDateString('pt-BR')
+            : photoshoot.date.toLocaleDateString('pt-BR')}{' '}
+          • {photoshoot.location}
         </p>
 
         <p className="mt-3 text-gray-700">{photoshoot.description}</p>
@@ -61,7 +67,7 @@ export function PhotoshootCard({
                 Modelos
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {photoshoot.models.map((model) => (
+                {photoshoot.models.map((model: any) => (
                   <TeamMemberTag key={model.id} member={model} />
                 ))}
               </div>
@@ -69,13 +75,13 @@ export function PhotoshootCard({
           )}
 
           {/* Helpers */}
-          {photoshoot.helpers.length > 0 && (
+          {helpers.length > 0 && (
             <div>
               <p className="text-xs font-semibold uppercase text-gray-600">
                 Equipe
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {photoshoot.helpers.map((helper) => (
+                {helpers.map((helper) => (
                   <TeamMemberTag key={helper.id} member={helper} />
                 ))}
               </div>
@@ -98,20 +104,20 @@ export function PhotoshootCard({
               <div>
                 <h4 className="mb-3 font-semibold text-black">Modelos</h4>
                 <div className="space-y-2">
-                  {photoshoot.models.map((model) => (
+                  {photoshoot.models.map((model: any) => (
                     <TeamMemberDetail key={model.id} member={model} />
                   ))}
                 </div>
               </div>
             )}
 
-            {photoshoot.helpers.length > 0 && (
+            {helpers.length > 0 && (
               <div>
                 <h4 className="mb-3 font-semibold text-black">
                   Equipe de Suporte
                 </h4>
                 <div className="space-y-2">
-                  {photoshoot.helpers.map((helper) => (
+                  {helpers.map((helper) => (
                     <TeamMemberDetail key={helper.id} member={helper} />
                   ))}
                 </div>
@@ -124,7 +130,7 @@ export function PhotoshootCard({
   );
 }
 
-function TeamMemberTag({ member }: { member: TeamMember }) {
+function TeamMemberTag({ member }: { member: any }) {
   return (
     <a
       href={member.instagram || '#'}
@@ -138,8 +144,8 @@ function TeamMemberTag({ member }: { member: TeamMember }) {
   );
 }
 
-function TeamMemberDetail({ member }: { member: TeamMember }) {
-  const roleLabels: Record<TeamMember['role'], string> = {
+function TeamMemberDetail({ member }: { member: any }) {
+  const roleLabels: Record<string, string> = {
     model: 'Modelo',
     stylist: 'Stylist',
     makeup: 'Maquiagem',

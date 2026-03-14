@@ -64,13 +64,13 @@ export function PartnerCard({ partner }: PartnerCardProps) {
   );
 }
 
-function getCategoryLabel(category: Partner['category']): string {
-  const labels: Record<Partner['category'], string> = {
+function getCategoryLabel(category?: Partner['category']): string {
+  const labels: Record<string, string> = {
     models: 'Modelos',
     agências: 'Agências',
     stylists: 'Stylists',
     brands: 'Marcas',
     makeup: 'Maquiagem & Cabelo',
   };
-  return labels[category];
+  return category ? labels[category] : 'Parceiro';
 }

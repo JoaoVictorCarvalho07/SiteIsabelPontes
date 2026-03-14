@@ -1,8 +1,5 @@
-import type { Partner } from '@/types/partner';
+import type { Partner, PartnerInput } from '@/types/partner';
 import { slugify } from '../utils/slugify';
-
-
-
 
 const rawPartners: PartnerInput[] = [
   {
