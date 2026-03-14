@@ -8,6 +8,7 @@ import {
   ItemTitle,
 } from '@/components/ui/item';
 import { Link } from 'react-router';
+import { useGallery } from '@/hooks/useGallery';
 
 type EditorialCard = {
   title: string;
@@ -16,52 +17,52 @@ type EditorialCard = {
   href: string;
 };
 
-type LinkDescription = {
-  title: string;
-  description: string;
-  href: string;
-  label: string;
-};
+// type LinkDescription = {
+//   title: string;
+//   description: string;
+//   href: string;
+//   label: string;
+// };
 
-const linkDescriptions: LinkDescription[] = [
-  {
-    title: 'Sobre Mim',
-    description: 'Conheça minha trajetória e inspirações.',
-    href: '/sobre',
-    label: 'Minha Trajetoria →',
-  },
-  {
-    title: 'Portfólio Completo',
-    description: 'Explore todos os meus projetos e ensaios fotográficos.',
-    href: '/portfolio',
-    label: 'Ver Portfólio →',
-  },
-  {
-    title: 'Blog',
-    description: 'Leia meus artigos sobre fotografia e direção criativa.',
-    href: '/blog',
-    label: 'Visitar Blog →',
-  },
-  {
-    title: 'Contato',
-    description: 'Vamos trabalhar juntos? Entre em contato comigo.',
-    href: '/contato',
-    label: 'Fale Comigo →',
-  },
-  {
-    title: 'Parceiros',
-    description: 'Conheça minha equipe e colaboradores.',
-    href: '/parceiros',
-    label: 'Ver Parceiros →',
-  },
-];
+// const linkDescriptions: LinkDescription[] = [
+//   {
+//     title: 'Sobre Mim',
+//     description: 'Conheça minha trajetória e inspirações.',
+//     href: '/sobre',
+//     label: 'Minha Trajetoria →',
+//   },
+//   {
+//     title: 'Portfólio Completo',
+//     description: 'Explore todos os meus projetos e ensaios fotográficos.',
+//     href: '/galeria',
+//     label: 'Ver Portfólio →',
+//   },
+//   {
+//     title: 'Blog',
+//     description: 'Leia meus artigos sobre fotografia e direção criativa.',
+//     href: '/blog',
+//     label: 'Visitar Blog →',
+//   },
+//   {
+//     title: 'Contato',
+//     description: 'Vamos trabalhar juntos? Entre em contato comigo.',
+//     href: '/contato',
+//     label: 'Fale Comigo →',
+//   },
+//   {
+//     title: 'Parceiros',
+//     description: 'Conheça minha equipe e colaboradores.',
+//     href: '/parceiros',
+//     label: 'Ver Parceiros →',
+//   },
+// ];
 
 const cards: EditorialCard[] = [
   {
     title: 'Fotografia artística',
     description: 'Ensaios conceituais e direção de pessoas.',
     image: '/cards/Milena.jpg',
-    href: '/portfolio',
+    href: '/galeria',
   },
   {
     title: 'Mídia kit & creator',
@@ -69,15 +70,19 @@ const cards: EditorialCard[] = [
     image: '/cards/MidiaKit.jpg',
     href: 'https://xn--isabelpontesportflio-r8b.com.br/',
   },
-  {
-    title: 'Direção criativa',
-    description: 'Storytelling, direção de arte e identidade visual.',
-    image: '/cards/Director.jpg',
-    href: '/direcao-criativa',
-  },
+  // {
+  //   title: 'Direção criativa',
+  //   description: 'Storytelling, direção de arte e identidade visual.',
+  //   image: '/cards/Director.jpg',
+  //   href: '/direcao-criativa',
+  // },
 ];
 
 export default function HomeEditorial() {
+  const { photos, temas, ensaios, loading, error } = useGallery();
+
+  console.log({ photos, temas, ensaios, loading, error });
+
   return (
     <main className="bg-background text-foreground ">
       {/* HERO */}
@@ -103,7 +108,7 @@ export default function HomeEditorial() {
 
       {/* CARDS EDITORIAIS */}
       <section className="mx-auto max-w-full px-6 py-24 ">
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2">
           {cards.map((card) => (
             <a
               key={card.title}
@@ -137,7 +142,7 @@ export default function HomeEditorial() {
 
       {/* SOBRE MIM */}
       <section className="mx-auto max-w-6xl px-6 pb-32 md:px-24">
-        {linkDescriptions.map((link) => (
+        {/* {linkDescriptions.map((link) => (
           <Item key={link.title} className="border  border-neutral-600 mt-10">
             <ItemContent className="grow-3 items-center">
               <ItemTitle className="">{link.title}</ItemTitle>
@@ -152,7 +157,7 @@ export default function HomeEditorial() {
               </Button>
             </ItemActions>
           </Item>
-        ))}
+        ))} */}
 
         {/* <Item className="border  border-neutral-600">
           <ItemContent className="grow-3 items-center">

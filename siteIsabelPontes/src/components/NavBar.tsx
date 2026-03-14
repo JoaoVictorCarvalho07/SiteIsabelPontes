@@ -12,7 +12,7 @@ export default function Navbar() {
   // Determine text color based on current page
   // SobreMim and Contato use inverse theme (dark text on light background)
   // Other pages use light text fixed
-  const isDarkThemePage = ['/sobre', '/contato', '/blog/'].includes(
+  const isDarkThemePage = ['/sobre', '/contato', '/blog/', '/galeria'].includes(
     location.pathname,
   );
   const textColorClass = isDarkThemePage ? 'text-primary' : 'text-white';
@@ -22,7 +22,7 @@ export default function Navbar() {
     const onChange = () => {
       setLogoSrc(
         !isDarkThemePage
-          ? '/logo/logo_isabel_branca.png'  
+          ? '/logo/logo_isabel_branca.png'
           : mediaDark.matches
             ? '/logo/logo_isabel_branca.png'
             : '/logo/logo_isabel2.png',
@@ -117,12 +117,12 @@ export default function Navbar() {
         {/* links desktop */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link
-            to="/portfolio"
+            to="/galeria"
             className="transition-opacity hover:opacity-75 hover:scale-125"
           >
-            Portfólio
+            Galeria
           </Link>
-          <Link
+          {/* <Link
             to="/blog"
             className="transition-opacity hover:opacity-75 hover:scale-125"
           >
@@ -133,7 +133,7 @@ export default function Navbar() {
             className="transition-opacity hover:opacity-75 hover:scale-125"
           >
             Parceiros
-          </Link>
+          </Link> */}
           <Link
             to="/sobre"
             className="transition-opacity hover:opacity-75 hover:scale-125"

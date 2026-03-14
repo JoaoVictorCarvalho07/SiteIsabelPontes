@@ -17,15 +17,19 @@ function App() {
       <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<HomeEditorial />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<BlogPost />} />
-        <Route path="/parceiros" element={<Partners />} />
+        {/* <Route path="/portfolio" element={<Portfolio />} /> */}
+        {/* <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} /> */}
+        {/* <Route path="/parceiros" element={<Partners />} /> */}
         <Route path="/sobre" element={<SobreMim />} />
         <Route path="/contato" element={<ContactSection />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/galeria" element={<PhotoGallery />} />
       </Routes>
+
+      <p className="gallery-footer">
+        © 2026 Isabel Pontes · Todos os direitos reservados
+      </p>
     </BrowserRouter>
   );
 }

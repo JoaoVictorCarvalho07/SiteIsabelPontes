@@ -3,8 +3,8 @@ import type { Category, Photo } from '@/types/photoGallery';
 export const photos: Photo[] = [
   {
     id: 1,
-    src: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80',
-    alt: 'Castle in the mist',
+    src: 'afrodite/mika/capa.webp',
+    alt: '',
     category: 'Epoca',
   },
   {

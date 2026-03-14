@@ -15,8 +15,6 @@ interface PhotoshootCardProps {
 
 export function PhotoshootCard({
   partners,
-  models,
-  helpers,
   photoshoot,
   onImageClick,
 }: PhotoshootCardProps) {
