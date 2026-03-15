@@ -4,14 +4,12 @@ import HomeEditorial from './pages/HomeEditorial';
 import SobreMim from './pages/SobreMim';
 import NavBar from './components/NavBar';
 import ContactSection from './pages/ContactSection';
-import Portfolio from './pages/Portfolio';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Partners from './pages/Partners';
 import NotFound from './pages/NotFound';
 import PhotoGallery from './pages/PhotoGallery';
+import { useGallery } from './hooks/useGallery';
 
 function App() {
+  const { fotos } = useGallery();
   return (
     <BrowserRouter>
       <NavBar></NavBar>

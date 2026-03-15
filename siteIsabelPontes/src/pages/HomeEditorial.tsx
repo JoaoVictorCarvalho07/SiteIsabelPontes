@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/item';
 import { Link } from 'react-router';
 import { useGallery } from '@/hooks/useGallery';
+import { useMemo } from 'react';
 
 type EditorialCard = {
   title: string;
@@ -57,31 +58,41 @@ type EditorialCard = {
 //   },
 // ];
 
-const cards: EditorialCard[] = [
-  {
-    title: 'Fotografia artística',
-    description: 'Ensaios conceituais e direção de pessoas.',
-    image: '/cards/Milena.jpg',
-    href: '/galeria',
-  },
-  {
-    title: 'Mídia kit & creator',
-    description: 'Conteúdo autêntico com estética elevada.',
-    image: '/cards/MidiaKit.jpg',
-    href: 'https://xn--isabelpontesportflio-r8b.com.br/',
-  },
-  // {
-  //   title: 'Direção criativa',
-  //   description: 'Storytelling, direção de arte e identidade visual.',
-  //   image: '/cards/Director.jpg',
-  //   href: '/direcao-criativa',
-  // },
-];
-
 export default function HomeEditorial() {
-  const { photos, temas, ensaios, loading, error } = useGallery();
+  const { photos, temas, loading, error } = useGallery();
+  function shuffle<T>(arr: T[]): T[] {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  const shuffled = useMemo(() => shuffle(photos), [photos]);
 
-  console.log({ photos, temas, ensaios, loading, error });
+  const cards: EditorialCard[] = [
+    {
+      title: 'Fotografia artística',
+      description: 'Ensaios conceituais e direção de pessoas.',
+      image:
+        shuffled.length > 0
+          ? shuffled[0].url
+          : '/cards/FotografiaArtistica.jpg',
+      href: '/galeria',
+    },
+    {
+      title: 'Mídia kit & creator',
+      description: 'Conteúdo autêntico com estética elevada.',
+      image: '/cards/MidiaKit.jpg',
+      href: 'https://xn--isabelpontesportflio-r8b.com.br/',
+    },
+    // {
+    //   title: 'Direção criativa',
+    //   description: 'Storytelling, direção de arte e identidade visual.',
+    //   image: '/cards/Director.jpg',
+    //   href: '/direcao-criativa',
+    // },
+  ];
 
   return (
     <main className="bg-background text-foreground ">

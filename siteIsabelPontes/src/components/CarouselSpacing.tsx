@@ -23,10 +23,10 @@ type Props = {
 export function CarouselSpacing({ items, className, gridof }: Props) {
   return (
     <Carousel
-      className={cn(className, 'w-full mx-5 max-w-full ml-0')}
+      className={cn(className, 'relative w-full mx-5 max-w-full ml-0')}
       opts={{ align: 'start', loop: true }}
     >
-      <CarouselContent className="ml-1">
+      <CarouselContent className="ml-1 sm:px-7 justify-between gap-4">
         {items.map((item, index) => (
           <CarouselItem
             key={index}
@@ -34,11 +34,11 @@ export function CarouselSpacing({ items, className, gridof }: Props) {
           >
             <div className="p-1">
               <Card className="rounded-xl  ">
-                <CardContent className="flex aspect-square items-center justify-center p-0  m-0 rounded-xl ">
+                <CardContent className="flex aspect-3/4  items-center justify-between p-0  m-0 rounded-xl ">
                   <img
                     src={`${item.src}`}
                     alt={item.alt}
-                    className="w-full rounded-xl"
+                    className="w-full rounded-xl h-full  md:h-72 lg:h-80 object-cover"
                   />
                 </CardContent>
               </Card>
@@ -46,8 +46,8 @@ export function CarouselSpacing({ items, className, gridof }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="sm:left-10 left-1/200 " />
-      <CarouselNext className="sm:right-10 right-1/200" />
+      <CarouselPrevious className="absolute left-1 top-1/2 -translate-y-1/2" />
+      <CarouselNext className="absolute right-1 top-1/2 -translate-y-1/2" />
     </Carousel>
   );
 }

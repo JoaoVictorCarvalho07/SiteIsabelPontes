@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,8 +42,6 @@
 .read-the-docs {
   color: #888;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap');
 
 .gallery-root {
   min-height: 100vh;
@@ -93,6 +93,8 @@
   background: #e3dbd2;
   border-radius: 100px;
   padding: 4px;
+  flex-wrap: wrap; /* quebra linha se não couber */
+  justify-content: center;
 }
 
 .gallery-nav-btn {
@@ -110,6 +112,26 @@
   transition:
     background 0.25s,
     color 0.25s;
+}
+
+@media (max-width: 750px) {
+  .gallery-nav-btn {
+    font-size: 10px;
+    padding: 6px 12px;
+    letter-spacing: 0.08em;
+  }
+  .gallery-nav {
+    gap: 4px;
+    border-radius: 0%;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-nav-btn {
+    font-size: 9px;
+    padding: 5px 10px;
+    letter-spacing: 0.05em;
+  }
 }
 
 .gallery-nav-btn:hover {
@@ -265,6 +287,17 @@
   }
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .lightbox-img-wrap {
   position: relative;
   max-width: 90vw;
@@ -379,4 +412,12 @@
   letter-spacing: 0.2em;
   color: #9e8c78;
   margin-top: 6px;
+}
+#root {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  min-height: 100vh;
 }

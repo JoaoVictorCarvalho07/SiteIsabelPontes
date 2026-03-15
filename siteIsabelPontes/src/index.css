@@ -29,7 +29,7 @@
       0 1px 2px rgba(255, 255, 255, 0.5),
       0 1px 6px rgba(255, 255, 255, 0.3);
   }
-  
+
   /* Combination - dark text with light shadow for light backgrounds */
   .text-on-light {
     @apply text-black;
@@ -46,7 +46,7 @@
 @layer base {
   :root {
     /* Fundo claro (creme) */
-    --background: 25.7 25.9% 94.7%; /* ~ #FAF7F3 */
+    --background: 35 29% 92%; /* ~ #FAF7F3 */
     --foreground: 23 24% 9%;
 
     --card: 30 29% 93%; /* ~ #F3E9DD */
@@ -173,11 +173,10 @@
   }
 }
 
-#root {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: none !important;
-  color: hsl(var(--foreground));
-  background: hsl(var(--background));
-  min-height: 100vh;
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

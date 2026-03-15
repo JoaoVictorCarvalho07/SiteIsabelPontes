@@ -35,9 +35,12 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const isDarkThemePage = ['/sobre', '/contato', '/blog/'].includes(
-      location.pathname,
-    );
+    const isDarkThemePage = [
+      '/sobre',
+      '/contato',
+      '/blog/',
+      '/galeria',
+    ].includes(location.pathname);
 
     const logoChange = () => {
       setLogoSrc(
@@ -93,7 +96,7 @@ export default function Navbar() {
     <header
       className={cn(
         [
-          `${textColorClass} sticky top-0 z-50 border-b w-full fixed top-0 left-0 right-0 z-50 justify-end px-5 py-3`,
+          `${textColorClass} border-b w-full fixed top-0 left-0 right-0 z-50 justify-end px-5 py-3`,
           'transition-all duration-300 bg-transparent border-transparent',
           visible ? 'translate-y-0' : '-translate-y-full',
         ].join(' '),
