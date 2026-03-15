@@ -17,7 +17,7 @@ export default function SobreMim() {
       <div className="px-10 pt-25 ">
         <ImageWithWrappedText imgUrl="./sobre/SobreMim4.jpeg">
           Meu nome é Isabel Pontes, sou fotógrafa artística e criadora visual
-          baseada em Curitiba. Minha relação com a arte começou muito antes da
+          atuando em Curitiba. Minha relação com a arte começou muito antes da
           fotografia entrar oficialmente na minha vida. Desde criança sempre fui
           movida por imaginação, movimento e criação. Participei de companhia de
           dança e sempre tive uma curiosidade natural sobre expressão artística.
