@@ -7,6 +7,7 @@ import ContactSection from './pages/ContactSection';
 import NotFound from './pages/NotFound';
 import PhotoGallery from './pages/PhotoGallery';
 import { useGallery } from './hooks/useGallery';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const { fotos } = useGallery();
@@ -28,6 +29,7 @@ function App() {
       <p className="gallery-footer">
         © 2026 Isabel Pontes · Todos os direitos reservados
       </p>
+      <SpeedInsights />
     </BrowserRouter>
   );
 }

@@ -120,34 +120,58 @@ export default function HomeEditorial() {
       {/* CARDS EDITORIAIS */}
       <section className="mx-auto max-w-full px-6 py-24 ">
         <div className="grid gap-6 md:grid-cols-2">
-          {cards.map((card) => (
-            <a
-              key={card.title}
-              href={card.href}
-              target="_blank"
-              className="group block"
-            >
-              <Card className="relative h-[520px] overflow-hidden rounded-3xl border-none">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50" />
+          {cards.map((card) =>
+            card.href.startsWith('http') ? (
+              <a
+                key={card.title}
+                href={card.href}
+                target="_parent"
+                className="group block"
+              >
+                <Card className="relative h-[520px] overflow-hidden rounded-3xl border-none">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50" />
 
-                <div className="relative z-10 flex h-full items-end p-6">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-white">
-                      {card.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-white/90">
-                      {card.description}
-                    </p>
+                  <div className="relative z-10 flex h-full items-end p-6">
+                    <div>
+                      <h3 className="text-2xl font-semibold text-white">
+                        {card.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-white/90">
+                        {card.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            </a>
-          ))}
+                </Card>
+              </a>
+            ) : (
+              <Link to={card.href}>
+                <Card className="relative h-[520px] overflow-hidden rounded-3xl border-none">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50" />
+
+                  <div className="relative z-10 flex h-full items-end p-6">
+                    <div>
+                      <h3 className="text-2xl font-semibold text-white">
+                        {card.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-white/90">
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
+            ),
+          )}
         </div>
       </section>
 
