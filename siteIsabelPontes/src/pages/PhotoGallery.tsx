@@ -148,6 +148,7 @@ export default function PhotoGallery(): React.ReactElement {
     return a;
   }
   const shuffled = useMemo(() => shuffle(filtered), [activeCategory, photos]);
+
   const reorderMemo = useMemo(
     () => reorderForMasonry(filtered, BREAKPOINTS.default),
     [filtered],
@@ -214,7 +215,7 @@ export default function PhotoGallery(): React.ReactElement {
           className="flex gap-2.5 px-15 pb-20 pt-8 max-[750px]:px-6 max-[750px]:py-6"
           columnClassName="flex flex-col gap-2.5"
         >
-          {reorderMemo.map((photo, i) => (
+          {shuffled.map((photo, i) => (
             <div
               key={photo.key}
               onClick={() => openLightbox(photo)}
