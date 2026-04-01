@@ -6,11 +6,9 @@ import NavBar from './components/NavBar';
 import ContactSection from './pages/ContactSection';
 import NotFound from './pages/NotFound';
 import PhotoGallery from './pages/PhotoGallery';
-import { useGallery } from './hooks/useGallery';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
-  const { fotos } = useGallery();
   return (
     <BrowserRouter>
       <NavBar></NavBar>
@@ -32,6 +30,6 @@ function App() {
       <SpeedInsights />
     </BrowserRouter>
   );
-}
+} 
 
 export default App;
