@@ -148,6 +148,18 @@ export default function PhotoGallery(): React.ReactElement {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // ___ timer para mostrar  a msg de clicar
+
+  const [showMsg, setShowMsg] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMsg(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // ── estados globais ───────────────────────────────────────────────────────
   if (loading)
     return (
@@ -254,8 +266,19 @@ export default function PhotoGallery(): React.ReactElement {
         )}
       >
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          up
+          Inicio
         </button>
+      </div>
+
+      <div
+        className={cn(
+          'fixed bottom-8 left-4 p-3 transition-opacity duration-300 border-[#c9bfb2] rounded-full bg-foreground text-background shadow-md',
+          {
+            'opacity-0 pointer-events-none': !scrollBtnVisible || showMsg,
+          },
+        )}
+      >
+        <p>Clique na imagem para ampliar</p>
       </div>
 
       {/* ── Lightbox ── */}
