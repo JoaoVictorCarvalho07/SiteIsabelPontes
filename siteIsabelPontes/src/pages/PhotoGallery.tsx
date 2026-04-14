@@ -203,8 +203,10 @@ export default function PhotoGallery(): React.ReactElement {
                   'cursor-pointer rounded-full border-none font-["Jost"] text-[12px] font-light uppercase tracking-[0.12em] transition-[background,color] duration-200',
                   'px-5 py-2',
                   'max-[750px]:px-3 max-[750px]:py-1.5 max-[750px]:text-[20px]',
-                  'max-[480px]:px-2.5 max-[480px]:py-1 max-[480px]:text-[14px] text-secondary',
-                  activeCategory === cat ? 'bg-background text-[#e3dbd2]!' : '',
+                  'max-[480px]:px-2.5 max-[480px]:py-1 max-[480px]:text-[14px] ',
+                  activeCategory == cat
+                    ? 'bg-background text-foreground'
+                    : 'text-primary/70 hover:bg-primary/10 hover:text-secondary',
                 ].join(' ')}
               >
                 {cat}
@@ -229,11 +231,9 @@ export default function PhotoGallery(): React.ReactElement {
               style={{ animationDelay: `${i * 60}ms` }}
               className="group relative cursor-pointer overflow-hidden rounded-[15px] opacity-0 animate-[fadeUp_0.5s_ease_forwards] hover:z-10 hover:shadow-[0_20px_60px_rgba(42,32,24,0.22)]"
             >
-              {/* skeleton — some quando a imagem carrega */}
               {!loadedIds.has(photo.key) && (
                 <div className="absolute inset-0 z-10 animate-pulse rounded-[15px] bg-[#e3dbd2]" />
               )}
-
               <img
                 src={photo.url}
                 alt={photo.alt}
@@ -247,7 +247,6 @@ export default function PhotoGallery(): React.ReactElement {
                   loadedIds.has(photo.key) ? 'opacity-100' : 'opacity-0',
                 )}
               />
-
               <div className="absolute inset-0 flex items-end rounded-[15px] bg-linear-to-t from-[rgba(42,32,24,0.55)] to-transparent p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <span className="font-['Cormorant_Garamond'] text-sm italic tracking-[0.05em] text-[#f0ebe4]">
                   {photo.tema}
