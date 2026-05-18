@@ -3,23 +3,34 @@ import { Link, useLocation } from 'react-router-dom';
 import { HamburgerMenu } from './HamburgerMenu';
 import { cn } from '@/lib/utils';
 
+const DARK_LOGO_ROUTES = ['/sobre', '/contato', '/blog/', '/galeria'];
+
+const NAV_LINKS = [
+  { to: '/galeria', label: 'Galeria' },
+  { to: '/sobre', label: 'Sobre' },
+  { to: '/contato', label: 'Contato' },
+];
+
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const lastY = useRef(0);
   const [logoSrc, setLogoSrc] = useState('/logo/logo_isabel2.png');
   const location = useLocation();
 
-  // Determine text color based on current page
-  // SobreMim and Contato use inverse theme (dark text on light background)
-  // Other pages use light text fixed
-  const isDarkThemePage = ['/sobre', '/contato', '/blog/', '/galeria'].includes(
-    location.pathname,
-  );
-  const textColorClass = isDarkThemePage ? 'text-primary' : 'text-white';
+  const isBlogPost =
+    location.pathname.startsWith('/blog/') && location.pathname !== '/blog/';
+  const isDarkThemePage = DARK_LOGO_ROUTES.includes(location.pathname);
+  const textColorClass =
+    isDarkThemePage || isBlogPost ? 'text-primary' : 'text-white';
+
   useEffect(() => {
     const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    const onChange = () => {
+    const updateLogo = () => {
+      if (isBlogPost) {
+        setLogoSrc('/logo/logo_isabel2.png');
+        return;
+      }
       setLogoSrc(
         !isDarkThemePage
           ? '/logo/logo_isabel_branca.png'
@@ -29,40 +40,9 @@ export default function Navbar() {
       );
     };
 
-    onChange(); // roda 1x no load
-    mediaDark.addEventListener('change', onChange);
-    return () => mediaDark.removeEventListener('change', onChange);
-  }, []);
-
-  useEffect(() => {
-    const isDarkThemePage = [
-      '/sobre',
-      '/contato',
-      '/blog/',
-      '/galeria',
-    ].includes(location.pathname);
-
-    const logoChange = () => {
-      setLogoSrc(
-        !isDarkThemePage
-          ? '/logo/logo_isabel_branca.png'
-          : window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? '/logo/logo_isabel_branca.png'
-            : '/logo/logo_isabel2.png',
-      );
-    };
-
-    const verificaBlogPage = () => {
-      if (
-        location.pathname.startsWith('/blog/') &&
-        location.pathname !== '/blog/'
-      ) {
-        setLogoSrc('/logo/logo_isabel2.png');
-      } else {
-        logoChange();
-      }
-    };
-    verificaBlogPage();
+    updateLogo();
+    mediaDark.addEventListener('change', updateLogo);
+    return () => mediaDark.removeEventListener('change', updateLogo);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -72,19 +52,15 @@ export default function Navbar() {
       const y = window.scrollY;
       const delta = y - lastY.current;
 
-      // sempre aparece se estiver bem no topo
       if (y < 25) {
         setVisible(true);
         lastY.current = y;
         return;
       }
 
-      // evita ficar tremendo com micro scroll
       if (Math.abs(delta) < 8) return;
 
-      // desceu -> esconde | subiu -> mostra
       setVisible(delta < 0);
-
       lastY.current = y;
     };
 
@@ -95,14 +71,9 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        [
-          `${textColorClass} border-b w-full fixed top-0 left-0 right-0 z-50 justify-end px-5 py-3`,
-          'transition-all duration-300 bg-transparent border-transparent',
-          visible ? 'translate-y-0' : '-translate-y-full',
-        ].join(' '),
-        location.pathname.startsWith('/blog/') && location.pathname !== '/blog/'
-          ? 'text-black'
-          : '',
+        `${textColorClass} border-b w-full fixed top-0 left-0 right-0 z-50 justify-end px-5 py-3`,
+        'transition-all duration-300 bg-transparent border-transparent',
+        visible ? 'translate-y-0' : '-translate-y-full',
       )}
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
@@ -117,42 +88,19 @@ export default function Navbar() {
           <img src={logoSrc} alt="" />
         </Link>
 
-        {/* links desktop */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link
-            to="/galeria"
-            className="transition-opacity hover:opacity-75 hover:scale-125"
-          >
-            Galeria
-          </Link>
-          {/* <Link
-            to="/blog"
-            className="transition-opacity hover:opacity-75 hover:scale-125"
-          >
-            Blog
-          </Link>
-          <Link
-            to="/parceiros"
-            className="transition-opacity hover:opacity-75 hover:scale-125"
-          >
-            Parceiros
-          </Link> */}
-          <Link
-            to="/sobre"
-            className="transition-opacity hover:opacity-75 hover:scale-125"
-          >
-            Sobre
-          </Link>
-          <Link
-            to="/contato"
-            className="transition-opacity hover:opacity-75 hover:scale-125"
-          >
-            Contato
-          </Link>
+          {NAV_LINKS.map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className="transition-opacity hover:opacity-75 hover:scale-125"
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
-        {/* hamburger mobile */}
-        <HamburgerMenu className="text-black  " />
+        <HamburgerMenu className="text-black" />
       </div>
     </header>
   );

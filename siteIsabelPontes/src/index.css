@@ -1,100 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
 /* dark: funcionar do jeito shadcn espera */
 @custom-variant dark (&:is(.dark *));
 
-/* Adaptive text color utilities */
-@layer utilities {
-  /* Use mix-blend-mode to create adaptive text contrast */
-  .text-contrast-auto {
-    mix-blend-mode: lighten;
-    color: #000;
-  }
-
-  .text-contrast-auto-dark {
-    mix-blend-mode: screen;
-    color: #fff;
-  }
-
-  /* Smart text shadows for better contrast over any background */
-  .text-shadow-contrast {
-    text-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.3),
-      0 1px 6px rgba(0, 0, 0, 0.2);
-  }
-
-  .text-shadow-contrast-light {
-    text-shadow:
-      0 1px 2px rgba(255, 255, 255, 0.5),
-      0 1px 6px rgba(255, 255, 255, 0.3);
-  }
-
-  /* Combination - dark text with light shadow for light backgrounds */
-  .text-on-light {
-    @apply text-black;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
-  }
-
-  /* Combination - light text with dark shadow for dark backgrounds */
-  .text-on-dark {
-    @apply text-white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  }
-}
-
-@layer base {
-  :root {
-    /* Fundo claro (creme) */
-    --background: 35 29% 92%; /* ~ #FAF7F3 */
-    --foreground: 23 24% 9%;
-
-    --card: 30 29% 93%; /* ~ #F3E9DD */
-    --card-foreground: 23 24% 9%;
-
-    --popover: 30 33% 97%;
-    --popover-foreground: 23 24% 9%;
-
-    /* Base (marrom) */
-    --primary: 22 26% 18%; /* ~ #3A2A22 */
-    --primary-fixed: 22 26% 18%; /* ~ #3A2A22 */
-
-    --primary-foreground: 30 33% 97%;
-    --primary-foreground-fixed: 30 33% 97%;
-
-    /* Superfícies */
-    --secondary: 30 29% 93%;
-    --secondary-foreground: 22 26% 18%;
-
-    --muted: 30 20% 90%;
-    --muted-foreground: 22 12% 38%;
-
-    /* ✅ Verde amazônico como ACCENT */
-    --accent: 166 30% 21%; /* ~ #1F3A34 */
-    --accent-foreground: 30 33% 97%;
-
-    /* Danger (vinho) */
-    --destructive: 346 50% 24%; /* ~ #5A1E2C */
-    --destructive-foreground: 30 33% 97%;
-
-    --border: 24 15% 84%;
-    --input: 24 15% 84%;
-
-    /* Ring usando verde (fica coeso) */
-    --ring: 166 30% 21%;
-
-    /* ✅ Extras: dourado separado (pra detalhes) */
-    --gold: 43 38% 63%; /* ~ #C9B078 */
-    --gold-soft: 43 52% 85%; /* ~ #E6D3A3 */
-
-    /* Extras (hex que você já tinha) */
-    --bege: #f5e6d3;
-    --gray-light: #e9e3c68a;
-  }
-}
-
-/* ✅ ESSA PARTE É O QUE ESTÁ FALTANDO */
 @theme {
+  /* === Cores (mapeadas das vars CSS) === */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
@@ -130,6 +42,140 @@
 
   --color-primary-fixed: hsl(var(--primary-fixed));
   --color-foreground-fixed: hsl(var(--foreground-fixed));
+
+  /* === Tipografia === */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Jost', system-ui, sans-serif;
+
+  /* Escala de tamanhos */
+  --text-display: clamp(2.5rem, 6vw, 4rem);
+  --text-h1: clamp(2rem, 4vw, 3rem);
+  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --text-body: 1rem;
+  --text-label: 0.875rem;
+  --text-caption: 0.75rem;
+
+  /* Leading (line-height) */
+  --leading-display: 1.1;
+  --leading-heading: 1.25;
+  --leading-body: 1.6;
+  --leading-tight: 1.2;
+
+  /* Tracking (letter-spacing) */
+  --tracking-display: -0.02em;
+  --tracking-heading: -0.01em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.12em;
+  --tracking-widest: 0.35em;
+
+  /* === Espaçamento (grid de 8px) === */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-6: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+  --space-12: 6rem;    /* 96px */
+  --space-16: 8rem;    /* 128px */
+  --space-24: 12rem;   /* 192px */
+  --space-32: 16rem;   /* 256px */
+
+  /* === Border Radius === */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* === Transições === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-spring: 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* === Sombras === */
+  --shadow-sm: 0 1px 3px rgba(42, 32, 24, 0.08);
+  --shadow-md: 0 4px 12px rgba(42, 32, 24, 0.12);
+  --shadow-lg: 0 8px 30px rgba(42, 32, 24, 0.16);
+  --shadow-xl: 0 20px 60px rgba(42, 32, 24, 0.22);
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-ui);
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    color: hsl(var(--foreground));
+    background: hsl(var(--background));
+    min-height: 100vh;
+  }
+
+  :root {
+    /* Fundo claro (creme) */
+    --background: 35 29% 92%; /* ~ #FAF7F3 */
+    --foreground: 23 24% 9%;
+
+    --card: 30 29% 93%; /* ~ #F3E9DD */
+    --card-foreground: 23 24% 9%;
+
+    --popover: 30 33% 97%;
+    --popover-foreground: 23 24% 9%;
+
+    /* Base (marrom) */
+    --primary: 22 26% 18%; /* ~ #3A2A22 */
+    --primary-fixed: 22 26% 18%; /* ~ #3A2A22 */
+
+    --primary-foreground: 30 33% 97%;
+    --primary-foreground-fixed: 30 33% 97%;
+
+    /* Superfícies */
+    --secondary: 30 29% 93%;
+    --secondary-foreground: 22 26% 18%;
+
+    --muted: 30 20% 90%;
+    --muted-foreground: 22 12% 38%;
+
+    /* Verde amazônico como ACCENT */
+    --accent: 166 30% 21%; /* ~ #1F3A34 */
+    --accent-foreground: 30 33% 97%;
+
+    /* Danger (vinho) */
+    --destructive: 346 50% 24%; /* ~ #5A1E2C */
+    --destructive-foreground: 30 33% 97%;
+
+    --border: 24 15% 84%;
+    --input: 24 15% 84%;
+
+    /* Ring usando verde (fica coeso) */
+    --ring: 166 30% 21%;
+
+    /* Dourado separado (pra detalhes) */
+    --gold: 43 38% 63%; /* ~ #C9B078 */
+    --gold-soft: 43 52% 85%; /* ~ #E6D3A3 */
+
+    --bege: #f5e6d3;
+    --gray-light: #e9e3c68a;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -154,8 +200,8 @@
       --muted: 22 18% 16%;
       --muted-foreground: 30 10% 75%;
 
-      /* ✅ Verde no dark (um pouco mais claro pra aparecer) */
-      --accent: 166 26% 28%; /* verde mais legível no dark */
+      /* Verde no dark (um pouco mais claro pra aparecer) */
+      --accent: 166 26% 28%;
       --accent-foreground: 30 33% 97%;
 
       --destructive: 350 42% 32%;
@@ -166,17 +212,132 @@
 
       --ring: 166 26% 28%;
 
-      /* dourado no dark */
+      /* Dourado no dark */
       --gold: 43 48% 76%;
       --gold-soft: 43 60% 88%;
     }
   }
 }
 
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@layer utilities {
+  /* Contraste adaptativo */
+  .text-contrast-auto {
+    mix-blend-mode: lighten;
+    color: #000;
+  }
+
+  .text-contrast-auto-dark {
+    mix-blend-mode: screen;
+    color: #fff;
+  }
+
+  .text-shadow-contrast {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 1px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .text-shadow-contrast-light {
+    text-shadow:
+      0 1px 2px rgba(255, 255, 255, 0.5),
+      0 1px 6px rgba(255, 255, 255, 0.3);
+  }
+
+  .text-on-light {
+    @apply text-black;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  }
+
+  .text-on-dark {
+    @apply text-white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Classes tipográficas semânticas */
+  .type-display {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    font-weight: 300;
+  }
+
+  .type-h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    font-weight: 300;
+  }
+
+  .type-h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    font-weight: 400;
+  }
+
+  .type-h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-normal);
+    font-weight: 400;
+  }
+
+  .type-body {
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-normal);
+    font-weight: 400;
+  }
+
+  .type-label {
+    font-family: var(--font-ui);
+    font-size: var(--text-label);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  .type-caption {
+    font-family: var(--font-display);
+    font-size: var(--text-caption);
+    font-style: italic;
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Scrollbar */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
+
+/* Keyframes globais */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }

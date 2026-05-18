@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeEditorial from './pages/HomeEditorial';
 import SobreMim from './pages/SobreMim';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import ContactSection from './pages/ContactSection';
 import NotFound from './pages/NotFound';
 import PhotoGallery from './pages/PhotoGallery';
@@ -11,7 +12,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 function App() {
   return (
     <BrowserRouter>
-      <NavBar></NavBar>
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomeEditorial />} />
         {/* <Route path="/portfolio" element={<Portfolio />} /> */}
@@ -23,13 +24,10 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/galeria" element={<PhotoGallery />} />
       </Routes>
-
-      <p className="gallery-footer">
-        © 2026 Isabel Pontes · Todos os direitos reservados
-      </p>
+      <Footer />
       <SpeedInsights />
     </BrowserRouter>
   );
-} 
+}
 
 export default App;
