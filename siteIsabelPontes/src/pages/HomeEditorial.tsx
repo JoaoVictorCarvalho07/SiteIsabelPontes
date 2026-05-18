@@ -1,8 +1,9 @@
 import { useGallery } from '@/hooks/useGallery';
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import EditorialCard from '@/components/EditorialCard';
 
-type EditorialCard = {
+type EditorialCardData = {
   title: string;
   description: string;
   image: string;
@@ -22,7 +23,7 @@ export default function HomeEditorial() {
   const { photos } = useGallery();
   const shuffled = useMemo(() => shuffle(photos), [photos]);
 
-  const cards: EditorialCard[] = [
+  const cards: EditorialCardData[] = [
     {
       title: 'Fotografia artística',
       description: 'Ensaios conceituais e direção de pessoas.',
@@ -63,8 +64,30 @@ export default function HomeEditorial() {
         </div>
       </section>
 
+      {/* INTRO */}
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-20 border-b border-border">
+        <div className="max-w-2xl">
+          <p className="type-label text-muted-foreground mb-3">
+            Diretora criativa &amp; fotógrafa · Curitiba
+          </p>
+          <h2 className="type-h2 mb-6">
+            Imagens que contam<br />histórias reais
+          </h2>
+          <p className="type-body text-muted-foreground">
+            Trabalho com fotografia artística e direção criativa desde Curitiba.
+            Cada ensaio é uma colaboração — entre luz, pessoa e intenção.
+          </p>
+          <Link
+            to="/sobre"
+            className="mt-8 inline-flex items-center gap-2 type-label text-foreground hover:text-muted-foreground transition-colors duration-200"
+          >
+            Minha trajetória →
+          </Link>
+        </div>
+      </section>
+
       {/* CARDS EDITORIAIS */}
-      <section className="mx-auto max-w-full px-6 py-24">
+      <section className="mx-auto max-w-full px-6 py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-2">
           {cards.map((card) => (
             <EditorialCard key={card.title} {...card} />

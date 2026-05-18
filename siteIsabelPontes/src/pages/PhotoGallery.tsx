@@ -46,6 +46,21 @@ function reorderForMasonry<T>(items: T[], columns: number): T[] {
   return result;
 }
 
+// ── skeleton shimmer ─────────────────────────────────────────────────────────
+function Shimmer({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn('absolute inset-0 z-10 rounded-[15px]', className)}
+      style={{
+        background:
+          'linear-gradient(90deg, #e3dbd2 25%, #ece6de 50%, #e3dbd2 75%)',
+        backgroundSize: '200% 100%',
+        animation: 'shimmer 1.4s infinite',
+      }}
+    />
+  );
+}
+
 // ── componente ───────────────────────────────────────────────────────────────
 export default function PhotoGallery(): React.ReactElement {
   const { photos, temas, loading, error } = useGallery();
@@ -182,22 +197,30 @@ export default function PhotoGallery(): React.ReactElement {
   return (
     <>
       <div className="min-h-screen bg-background text-foreground md:pt-30 pt-10">
-        {/* ── Header / Filtros ── */}
+        {/* ── Header ── */}
         <header className="flex flex-wrap items-end justify-between gap-6 px-15 max-[750px]:flex-col max-[750px]:items-start max-[750px]:px-6 max-[750px]:pt-10">
-          <div className="flex flex-col gap-1" />
+          {/* Marca */}
+          <div className="flex flex-col gap-1">
+            <span className="type-label text-muted-foreground">Portfólio</span>
+            <h1 className="type-h1">Isabel Pontes</h1>
+          </div>
 
-          <nav className="flex flex-wrap justify-center gap-1.5 rounded-full bg-[#e3dbd2] p-1 max-[750px]:w-full">
+          {/* Filtros de categoria */}
+          <nav
+            className="flex flex-wrap justify-center gap-1 rounded-full bg-muted p-1 max-[750px]:w-full"
+            aria-label="Filtrar por categoria"
+          >
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
-                  'cursor-pointer rounded-full border-none font-ui type-label px-5 py-2 transition-[background,color] duration-200',
+                  'cursor-pointer rounded-full border-none type-label px-5 py-2 transition-[background,color] duration-200',
                   'max-[750px]:px-3 max-[750px]:py-1.5',
                   'max-[480px]:px-2.5 max-[480px]:py-1',
                   activeCategory === cat
-                    ? 'bg-background text-foreground'
-                    : 'text-primary/70 hover:bg-primary/10',
+                    ? 'bg-background text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-background/50',
                 )}
               >
                 {cat}
@@ -207,7 +230,7 @@ export default function PhotoGallery(): React.ReactElement {
         </header>
 
         {/* ── Divider ── */}
-        <div className="mx-15 mt-10 h-px bg-linear-to-r from-[#c9bfb2] to-transparent max-[750px]:mx-6 max-[750px]:mt-8" />
+        <div className="mx-15 mt-10 h-px bg-linear-to-r from-border to-transparent max-[750px]:mx-6 max-[750px]:mt-8" />
 
         {/* ── Masonry Grid ── */}
         <Masonry
@@ -222,9 +245,9 @@ export default function PhotoGallery(): React.ReactElement {
               style={{ animationDelay: `${i * 60}ms` }}
               className="group relative cursor-pointer overflow-hidden rounded-[15px] opacity-0 animate-[fadeUp_0.5s_ease_forwards] hover:z-10 hover:shadow-xl"
             >
-              {!loadedIds.has(photo.key) && (
-                <div className="absolute inset-0 z-10 animate-pulse rounded-[15px] bg-[#e3dbd2]" />
-              )}
+              {/* Skeleton shimmer enquanto carrega */}
+              {!loadedIds.has(photo.key) && <Shimmer />}
+
               <img
                 src={photo.url}
                 alt={photo.alt}
@@ -237,7 +260,8 @@ export default function PhotoGallery(): React.ReactElement {
                   loadedIds.has(photo.key) ? 'opacity-100' : 'opacity-0',
                 )}
               />
-              {/* overlay com tema */}
+
+              {/* Overlay com tema ao hover */}
               <div className="absolute inset-0 flex items-end rounded-[15px] bg-linear-to-t from-[rgba(42,32,24,0.55)] to-transparent p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <span className="type-caption text-[#f0ebe4]">
                   {photo.tema}
@@ -251,7 +275,7 @@ export default function PhotoGallery(): React.ReactElement {
       {/* ── Scroll to top ── */}
       <div
         className={cn(
-          'fixed bottom-8 right-4 p-3 transition-opacity duration-300 border-[#c9bfb2] rounded-full bg-foreground text-background shadow-md',
+          'fixed bottom-8 right-4 p-3 transition-opacity duration-300 rounded-full bg-foreground text-background shadow-md',
           { 'opacity-0 pointer-events-none': !scrollBtnVisible },
         )}
       >
@@ -262,10 +286,8 @@ export default function PhotoGallery(): React.ReactElement {
 
       <div
         className={cn(
-          'fixed bottom-8 left-4 p-3 transition-opacity duration-300 border-[#c9bfb2] rounded-full bg-foreground text-background shadow-md',
-          {
-            'opacity-0 pointer-events-none': !scrollBtnVisible || showMsg,
-          },
+          'fixed bottom-8 left-4 p-3 transition-opacity duration-300 rounded-full bg-foreground text-background shadow-md',
+          { 'opacity-0 pointer-events-none': !scrollBtnVisible || showMsg },
         )}
       >
         <p>Clique na imagem para ampliar</p>
@@ -300,9 +322,7 @@ export default function PhotoGallery(): React.ReactElement {
           {/* imagem */}
           <div
             className="relative max-h-[88vh] max-w-[90vw]"
-            style={{
-              animation: 'scaleIn 0.35s cubic-bezier(0.25,0.46,0.45,0.94)',
-            }}
+            style={{ animation: 'scaleIn 0.35s cubic-bezier(0.25,0.46,0.45,0.94)' }}
             onClick={(e) => e.stopPropagation()}
           >
             <img

@@ -15,83 +15,120 @@ export default function ContactSection() {
     'Contato pelo site',
   )}&body=${encodeURIComponent('Oi! Vim pelo seu site ✨\n\nQuero falar sobre:\n')}`;
 
+  const contactCards = [
+    {
+      title: 'WhatsApp',
+      description: 'Mais rápido para orçamento e disponibilidade.',
+      href: whatsappHref,
+      cta: 'Chamar no WhatsApp',
+      highlight: true,
+    },
+    {
+      title: 'Instagram',
+      description: 'Bate-papo, referências e bastidores.',
+      href: INSTAGRAM_URL,
+      cta: 'Abrir Instagram',
+    },
+    {
+      title: 'E-mail',
+      description: 'Para propostas, marcas e demandas formais.',
+      href: mailtoHref,
+      cta: 'Enviar e-mail',
+    },
+  ];
+
   return (
     <section id="contato" className="w-full pt-12 sm:pt-16">
       <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         {/* Header */}
-        <div className="mb-8 md:mb-10">
+        <div className="mb-8 md:mb-10 opacity-0 animate-[fadeUp_0.5s_ease_forwards]">
           <h2 className="type-h2">Contato</h2>
           <p className="mt-2 type-body text-muted-foreground">
             Me chama por onde for melhor — eu respondo {RESPONSE_TIME}. 🤍
           </p>
         </div>
 
-        {/* Cards de contato */}
+        {/* Cards de contato — entrada staggered */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <ContactCard
-            title="WhatsApp"
-            description="Mais rápido para orçamento e disponibilidade."
-            href={whatsappHref}
-            cta="Chamar no WhatsApp"
-            highlight
-          />
-          <ContactCard
-            title="Instagram"
-            description="Bate-papo, referências e bastidores."
-            href={INSTAGRAM_URL}
-            cta="Abrir Instagram"
-          />
-          <ContactCard
-            title="E-mail"
-            description="Para propostas, marcas e demandas formais."
-            href={mailtoHref}
-            cta="Enviar e-mail"
-          />
-        </div>
-
-        {/* Info extra */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="rounded-2xl border bg-background/60 backdrop-blur p-6">
-            <h3 className="type-h3">Como falar comigo</h3>
-            <ul className="mt-3 space-y-2 type-body text-muted-foreground">
-              <li className="flex gap-2">
-                <span className="text-foreground font-medium">•</span>
-                <span>Me diga o que você procura (ensaio / evento / UGC).</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-foreground font-medium">•</span>
-                <span>Se tiver, mande tema + referências (Pinterest/prints).</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-foreground font-medium">•</span>
-                <span>Data e cidade ajudam a eu te responder mais rápido.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border bg-muted/30 p-6">
-            <h3 className="type-h3">Atendimento</h3>
-            <p className="mt-3 type-body text-muted-foreground">
-              Base em{' '}
-              <span className="text-foreground font-medium">{CITY}</span>.
-              Outros locais sob consulta.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {['Ensaios artísticos', 'Direção de arte', 'Conteúdo / UGC'].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 rounded-full border type-label"
-                  >
-                    {tag}
-                  </span>
-                ),
-              )}
+          {contactCards.map((card, i) => (
+            <div
+              key={card.title}
+              className="opacity-0 animate-[fadeUp_0.5s_ease_forwards]"
+              style={{ animationDelay: `${100 + i * 80}ms` }}
+            >
+              <ContactCard {...card} />
             </div>
-          </div>
+          ))}
         </div>
 
-        <p className="mt-8 type-body font-bold text-muted-foreground">
+        {/* Info extra — entrada staggered */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {[
+            {
+              delay: '340ms',
+              className: 'rounded-2xl border bg-background/60 backdrop-blur p-6',
+              children: (
+                <>
+                  <h3 className="type-h3">Como falar comigo</h3>
+                  <ul className="mt-3 space-y-2 type-body text-muted-foreground">
+                    {[
+                      'Me diga o que você procura (ensaio / evento / UGC).',
+                      'Se tiver, mande tema + referências (Pinterest/prints).',
+                      'Data e cidade ajudam a eu te responder mais rápido.',
+                    ].map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="text-foreground font-medium">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ),
+            },
+            {
+              delay: '420ms',
+              className: 'rounded-2xl border bg-muted/30 p-6',
+              children: (
+                <>
+                  <h3 className="type-h3">Atendimento</h3>
+                  <p className="mt-3 type-body text-muted-foreground">
+                    Base em{' '}
+                    <span className="text-foreground font-medium">{CITY}</span>.
+                    Outros locais sob consulta.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {['Ensaios artísticos', 'Direção de arte', 'Conteúdo / UGC'].map(
+                      (tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 rounded-full border type-label"
+                        >
+                          {tag}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                </>
+              ),
+            },
+          ].map(({ delay, className, children }) => (
+            <div
+              key={delay}
+              className={cn(
+                'opacity-0 animate-[fadeUp_0.5s_ease_forwards]',
+                className,
+              )}
+              style={{ animationDelay: delay }}
+            >
+              {children}
+            </div>
+          ))}
+        </div>
+
+        <p
+          className="mt-8 type-body font-bold text-muted-foreground opacity-0 animate-[fadeUp_0.5s_ease_forwards]"
+          style={{ animationDelay: '500ms' }}
+        >
           Dica: se preferir, pode mandar só "vim pelo site" que eu te guio com
           as perguntas ✨
         </p>
@@ -117,10 +154,11 @@ function ContactCard({ title, description, href, cta, highlight }: ContactCardPr
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       className={cn(
-        'group flex flex-col gap-5 rounded-2xl border p-6 transition-all duration-200',
+        'group flex flex-col gap-5 rounded-2xl border p-6',
+        'transition-all duration-300',
         highlight
-          ? 'bg-foreground text-background border-foreground hover:bg-foreground/90'
-          : 'bg-card hover:border-primary/40 hover:shadow-md',
+          ? 'bg-foreground text-background border-foreground hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg'
+          : 'bg-card hover:border-primary/40 hover:-translate-y-0.5 hover:shadow-md',
       )}
     >
       <div className="flex items-start justify-between gap-4">
@@ -140,7 +178,8 @@ function ContactCard({ title, description, href, cta, highlight }: ContactCardPr
 
         <span
           className={cn(
-            'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-transform group-hover:translate-x-0.5',
+            'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border',
+            'transition-transform duration-200 group-hover:translate-x-1',
             highlight
               ? 'border-background/30 text-background'
               : 'border-muted-foreground/20',
@@ -153,7 +192,7 @@ function ContactCard({ title, description, href, cta, highlight }: ContactCardPr
 
       <div
         className={cn(
-          'inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition',
+          'inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition-colors duration-200',
           highlight
             ? 'border-background/30 text-background group-hover:bg-background/10'
             : 'border-muted-foreground/20 text-foreground group-hover:bg-muted/50',
