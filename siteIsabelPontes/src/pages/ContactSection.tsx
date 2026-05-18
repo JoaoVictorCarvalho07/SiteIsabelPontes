@@ -1,11 +1,11 @@
+import { cn } from '@/lib/utils';
+
 export default function ContactSection() {
-  // ====== EDITE AQUI ======
-  const WHATSAPP_NUMBER_E164 = '554191977011'; // 55 + DDD + número (sem +, sem espaços)
+  const WHATSAPP_NUMBER_E164 = '554191977011';
   const INSTAGRAM_URL = 'https://instagram.com/isapontesfoto';
   const EMAIL = 'isabelpontesfotografia@gmail.com';
   const CITY = 'Curitiba, PR';
   const RESPONSE_TIME = 'em até 24h úteis';
-  // ========================
 
   const waText = encodeURIComponent(
     'Oi! Vim pelo seu site ✨\n\nQuero falar sobre: (ensaio / evento / UGC)\nData/cidade: \nReferências (se tiver): \n',
@@ -17,18 +17,16 @@ export default function ContactSection() {
 
   return (
     <section id="contato" className="w-full pt-12 sm:pt-16">
-      <div className="mx-auto max-w-6xl px-4 py-12 md:py-16 ">
+      <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         {/* Header */}
         <div className="mb-8 md:mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            Contato
-          </h2>
-          <p className="mt-2 text-base md:text-lg text-muted-foreground">
+          <h2 className="type-h2">Contato</h2>
+          <p className="mt-2 type-body text-muted-foreground">
             Me chama por onde for melhor — eu respondo {RESPONSE_TIME}. 🤍
           </p>
         </div>
 
-        {/* Cards */}
+        {/* Cards de contato */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <ContactCard
             title="WhatsApp"
@@ -37,14 +35,12 @@ export default function ContactSection() {
             cta="Chamar no WhatsApp"
             highlight
           />
-
           <ContactCard
             title="Instagram"
             description="Bate-papo, referências e bastidores."
             href={INSTAGRAM_URL}
             cta="Abrir Instagram"
           />
-
           <ContactCard
             title="E-mail"
             description="Para propostas, marcas e demandas formais."
@@ -56,17 +52,15 @@ export default function ContactSection() {
         {/* Info extra */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="rounded-2xl border bg-background/60 backdrop-blur p-6">
-            <h3 className="text-lg font-semibold">Como falar comigo</h3>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <h3 className="type-h3">Como falar comigo</h3>
+            <ul className="mt-3 space-y-2 type-body text-muted-foreground">
               <li className="flex gap-2">
                 <span className="text-foreground font-medium">•</span>
                 <span>Me diga o que você procura (ensaio / evento / UGC).</span>
               </li>
               <li className="flex gap-2">
                 <span className="text-foreground font-medium">•</span>
-                <span>
-                  Se tiver, mande tema + referências (Pinterest/prints).
-                </span>
+                <span>Se tiver, mande tema + referências (Pinterest/prints).</span>
               </li>
               <li className="flex gap-2">
                 <span className="text-foreground font-medium">•</span>
@@ -76,30 +70,29 @@ export default function ContactSection() {
           </div>
 
           <div className="rounded-2xl border bg-muted/30 p-6">
-            <h3 className="text-lg font-semibold">Atendimento</h3>
-            <p className="mt-3 text-sm text-muted-foreground">
+            <h3 className="type-h3">Atendimento</h3>
+            <p className="mt-3 type-body text-muted-foreground">
               Base em{' '}
               <span className="text-foreground font-medium">{CITY}</span>.
               Outros locais sob consulta.
             </p>
-
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-full border text-sm">
-                Ensaios artísticos
-              </span>
-              <span className="px-3 py-1 rounded-full border text-sm">
-                Direção de arte
-              </span>
-              <span className="px-3 py-1 rounded-full border text-sm">
-                Conteúdo / UGC
-              </span>
+              {['Ensaios artísticos', 'Direção de arte', 'Conteúdo / UGC'].map(
+                (tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 rounded-full border type-label"
+                  >
+                    {tag}
+                  </span>
+                ),
+              )}
             </div>
           </div>
         </div>
 
-        {/* Rodapé pequeno */}
-        <p className="mt-8 text-xl font-bold text-muted-foreground">
-          Dica: se preferir, pode mandar só “vim pelo site” que eu te guio com
+        <p className="mt-8 type-body font-bold text-muted-foreground">
+          Dica: se preferir, pode mandar só "vim pelo site" que eu te guio com
           as perguntas ✨
         </p>
       </div>
@@ -115,61 +108,43 @@ interface ContactCardProps {
   highlight?: boolean;
 }
 
-function ContactCard({
-  title,
-  description,
-  href,
-  cta,
-  highlight,
-}: ContactCardProps) {
+function ContactCard({ title, description, href, cta, highlight }: ContactCardProps) {
+  const isExternal = href.startsWith('http') || href.startsWith('mailto');
+
   return (
     <a
       href={href}
-      target={
-        href.startsWith('http') || href.startsWith('https')
-          ? '_blank'
-          : undefined
-      }
-      rel={
-        href.startsWith('http') || href.startsWith('https')
-          ? 'noopener noreferrer'
-          : undefined
-      }
-      className={[
-        'group rounded-2xl border p-6 transition',
-        'hover:bg-muted/40',
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+      className={cn(
+        'group flex flex-col gap-5 rounded-2xl border p-6 transition-all duration-200',
         highlight
-          ? `${window.matchMedia('(prefers-color-scheme: dark)').matches ? 'hover:**:text-gold hover:border-gold ' : 'hover:**:text-accent hover:border-accent'} ` +
-            'bg-foreground text-background hover:opacity-95 hover:border '
-          : 'bg-background',
-      ].join(' ')}
+          ? 'bg-foreground text-background border-foreground hover:bg-foreground/90'
+          : 'bg-card hover:border-primary/40 hover:shadow-md',
+      )}
     >
-      <div className="flex items-start justify-between gap-4 ">
+      <div className="flex items-start justify-between gap-4">
         <div>
-          <h3
-            className={[
-              'text-lg font-semibold',
-              highlight ? 'text-background ' : '',
-            ].join(' ')}
-          >
+          <h3 className={cn('type-h3', highlight && 'text-background')}>
             {title}
           </h3>
           <p
-            className={[
-              'mt-2 text-sm',
-              highlight ? 'text-background/80' : 'text-muted-foreground',
-            ].join(' ')}
+            className={cn(
+              'mt-2 type-body text-sm',
+              highlight ? 'text-background/70' : 'text-muted-foreground',
+            )}
           >
             {description}
           </p>
         </div>
 
         <span
-          className={[
-            'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition',
-            highlight ? 'border-background/30' : 'border-muted-foreground/20',
-            'group-hover:translate-x-0.5',
-          ].join(' ')}
+          className={cn(
+            'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-transform group-hover:translate-x-0.5',
+            highlight
+              ? 'border-background/30 text-background'
+              : 'border-muted-foreground/20',
+          )}
           aria-hidden="true"
         >
           →
@@ -177,13 +152,12 @@ function ContactCard({
       </div>
 
       <div
-        className={[
-          'mt-5 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition',
+        className={cn(
+          'inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition',
           highlight
-            ? 'border-background/30 text-background'
-            : 'border-muted-foreground/20 text-foreground',
-          'group-hover:bg-background/10',
-        ].join(' ')}
+            ? 'border-background/30 text-background group-hover:bg-background/10'
+            : 'border-muted-foreground/20 text-foreground group-hover:bg-muted/50',
+        )}
       >
         {cta}
       </div>

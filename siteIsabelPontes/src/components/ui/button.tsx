@@ -9,15 +9,25 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-transparent text-primary-foreground hover:bg-primary/90',
-        destructive:
-          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
-        outline:
-          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
+        // Primary: marrom escuro — CTA principal
+        default:
+          'bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm',
+        // Accent: verde amazônico — CTA secundário
+        accent:
+          'bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm',
+        // Secondary: superfície clara — terciário
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        // Outline: borda sem fundo — ênfase baixa
+        outline:
+          'border border-primary/30 bg-transparent text-primary hover:bg-primary/5 hover:border-primary/60',
+        // Ghost: sem borda nem fundo — mínimo
         ghost:
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+          'bg-transparent text-foreground hover:bg-muted/60',
+        // Destructive
+        destructive:
+          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60',
+        // Link
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
