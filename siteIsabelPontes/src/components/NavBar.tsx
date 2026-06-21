@@ -3,7 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { HamburgerMenu } from './HamburgerMenu';
 import { cn } from '@/lib/utils';
 
-const DARK_LOGO_ROUTES = ['/sobre', '/contato', '/blog/', '/galeria'];
+const DARK_LOGO_ROUTES = ['/sobre', '/contato', '/blog/', '/galeria', '/precos'];
+
+// Rotas com fundo próprio claro — navbar sempre usa logo/texto escuros, ignorando o dark mode do sistema
+const FORCE_LIGHT_NAV_ROUTES = ['/precos'];
 
 const NAV_LINKS = [
   { to: '/galeria', label: 'Galeria' },
@@ -21,14 +24,18 @@ export default function Navbar() {
   const isBlogPost =
     location.pathname.startsWith('/blog/') && location.pathname !== '/blog/';
   const isDarkThemePage = DARK_LOGO_ROUTES.includes(location.pathname);
-  const textColorClass =
-    isDarkThemePage || isBlogPost ? 'text-primary' : 'text-white';
+  const isForcedLight = FORCE_LIGHT_NAV_ROUTES.includes(location.pathname);
+  const textColorClass = isForcedLight
+    ? 'text-primary-fixed'
+    : isDarkThemePage || isBlogPost
+      ? 'text-primary'
+      : 'text-white';
 
   useEffect(() => {
     const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     const updateLogo = () => {
-      if (isBlogPost) {
+      if (isBlogPost || isForcedLight) {
         setLogoSrc('/logo/logo_isabel2.png');
         return;
       }

@@ -83,7 +83,9 @@ export default function PrecosEvento() {
                 <div className="card-name">Combo 3 Fotos</div>
                 <div className="price">R$100</div>
               </div>
-              <div className="card-meta">R$33 por foto · 3 poses diferentes</div>
+              <div className="card-meta">
+                R$33 por foto · 3 poses diferentes
+              </div>
               <p className="card-desc">
                 Três poses diferentes pra registrar mais de um momento do dia.
               </p>
@@ -98,7 +100,9 @@ export default function PrecosEvento() {
                 <div className="card-name">Combo 5 Fotos</div>
                 <div className="price">R$150</div>
               </div>
-              <div className="card-meta">R$30 por foto · 5 poses diferentes</div>
+              <div className="card-meta">
+                R$30 por foto · 5 poses diferentes
+              </div>
               <p className="card-desc">
                 Cinco poses diferentes. O jeito mais completo de levar pra casa.
               </p>
@@ -130,7 +134,11 @@ export default function PrecosEvento() {
         {/* MINI ENSAIO */}
         <div className="section reveal">
           <div className="eyebrow">Pra guardar</div>
-          <div className="section-title">Mini Ensaio</div>
+          <div className="section-title">Mini Ensaio </div>
+          <p style={{ color: '#911', fontSize: 'bold', marginBottom: '20px' }}>
+            Apenas para quem reservar antes do evento!
+          </p>
+
           <p className="section-intro">
             Reserve 15 a 20 minutinhos só seus no nosso cenário. Fotos editadas
             com carinho, prontas em até 7 dias após o evento.
@@ -147,7 +155,7 @@ export default function PrecosEvento() {
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <circle cx="12" cy="12" r="3.2" />
               </svg>
-              <span>Exemplo: essencial</span>
+              <img src="./imgs_evento_celta/1.jpeg" alt="Exemplo: essencial" />
             </div>
             <div className="card-body">
               <div className="card-top">
@@ -172,7 +180,7 @@ export default function PrecosEvento() {
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <circle cx="12" cy="12" r="3.2" />
               </svg>
-              <span>Exemplo: completo</span>
+              <img src="./imgs_evento_celta/3.jpeg" alt="Exemplo: completo" />
             </div>
             <div className="card-body">
               <div className="card-top">
@@ -198,7 +206,7 @@ export default function PrecosEvento() {
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <circle cx="12" cy="12" r="3.2" />
               </svg>
-              <span>Exemplo: premium</span>
+              <img src="./imgs_evento_celta/2.jpeg" alt="Exemplo: premium" />
             </div>
             <div className="card-body">
               <div className="card-top">
@@ -259,30 +267,7 @@ export default function PrecosEvento() {
           <div className="brand">Isabel Pontes</div>
           <div className="note">fotografia</div>
           <div className="contact-edit">
-            <div className="edit-pill">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#F4EEDE"
-                strokeWidth="1.5"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.2" cy="6.8" r="0.6" fill="#F4EEDE" />
-              </svg>
-              https://instagram.com/isapontesfoto
-            </div>
-            <div className="edit-pill">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#F4EEDE"
-                strokeWidth="1.5"
-              >
-                <path d="M3 20l1.6-4.8A8 8 0 1 1 8.8 19.4z" />
-              </svg>
-              554191977011
-            </div>
+            <div></div>
           </div>
         </div>
       </div>

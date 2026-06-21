@@ -208,6 +208,16 @@
   gap: 4px;
   padding: 6px;
   text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.ip-precos .photo-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 .ip-precos .photo-slot svg {
   width: 18px;
@@ -420,6 +430,9 @@
   .ip-precos .photo-slot {
     width: 100%;
     height: 90px;
+    border-radius: 10px;
+  }
+  .ip-precos .photo-slot img {
     border-radius: 10px;
   }
 }
