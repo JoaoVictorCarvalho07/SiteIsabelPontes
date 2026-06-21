@@ -23,7 +23,7 @@ function App() {
         <Route path="/sobre" element={<SobreMim />} />
         <Route path="/contato" element={<ContactSection />} />
         <Route path="/galeria" element={<PhotoGallery />} />
-        <Route path="/precos" element={<PrecosEvento />} />
+        <Route path="/evento-celta" element={<PrecosEvento />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
