@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { to: '/galeria', label: 'Galeria' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/contato', label: 'Contato' },
+  { to: '/precos', label: 'Evento Celta' },
 ];
 
 export default function Navbar() {

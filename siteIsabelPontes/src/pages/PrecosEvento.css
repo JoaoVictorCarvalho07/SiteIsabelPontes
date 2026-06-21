@@ -1,0 +1,425 @@
+/* Folder de preços — Isabel Pontes Fotografia.
+   Estilos isolados sob .ip-precos para não vazar para o resto do app. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Jost:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap');
+
+.ip-precos {
+  --bg: #f4eede;
+  --bg-card: #fffcf4;
+  --green-deep: #28391f;
+  --green-mid: #4f6b43;
+  --brown: #7a5230;
+  --brown-light: #a9794c;
+  --gold: #b6913a;
+  --gold-light: #e6d8ac;
+  --ink: #2a2620;
+  --line: rgba(40, 57, 31, 0.16);
+}
+
+.ip-precos *,
+.ip-precos *::before,
+.ip-precos *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.ip-precos {
+  background: var(--bg);
+  background-image:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(182, 145, 58, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 88% 92%,
+      rgba(79, 107, 67, 0.1),
+      transparent 45%
+    );
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  padding: 28px 14px 60px;
+  min-height: 100vh;
+}
+
+/* ---------- shared type ---------- */
+.ip-precos .eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ip-precos .eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+.ip-precos .section-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--green-deep);
+  line-height: 1.1;
+  margin-top: 6px;
+}
+.ip-precos .script {
+  font-family: 'Caveat', cursive;
+  font-size: 21px;
+  color: var(--brown);
+  font-weight: 600;
+}
+
+/* ---------- folder ---------- */
+.ip-precos .folder {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -25px rgba(40, 57, 31, 0.45),
+    0 2px 8px rgba(40, 57, 31, 0.08);
+  border: 1px solid var(--line);
+}
+
+/* ---------- hero ---------- */
+.ip-precos .hero {
+  position: relative;
+  padding: 34px 26px 30px;
+  background: linear-gradient(180deg, #324726 0%, var(--green-deep) 100%);
+  color: #f4eede;
+  text-align: center;
+}
+.ip-precos .hero-frame {
+  width: 168px;
+  height: 200px;
+  margin: 0 auto 18px;
+  border-radius: 50% 50% 14px 14px / 60% 60% 10px 10px;
+  border: 2px solid rgba(244, 238, 222, 0.55);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(244, 238, 222, 0.07) 0 8px,
+      transparent 8px 16px
+    ),
+    rgba(244, 238, 222, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+}
+.ip-precos .hero-frame svg {
+  width: 30px;
+  height: 30px;
+  opacity: 0.8;
+}
+.ip-precos .hero-frame span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(244, 238, 222, 0.75);
+  text-align: center;
+  line-height: 1.4;
+}
+.ip-precos .hero .brand {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.05;
+}
+.ip-precos .hero .tagline {
+  margin-top: 10px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-weight: 500;
+}
+.ip-precos .hero .sub {
+  margin-top: 14px;
+  font-family: 'Caveat', cursive;
+  font-size: 19px;
+  color: rgba(244, 238, 222, 0.85);
+}
+
+/* ---------- branch divider ---------- */
+.ip-precos .divider {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0 6px;
+}
+.ip-precos .divider svg {
+  width: 140px;
+  height: 22px;
+}
+
+/* ---------- sections ---------- */
+.ip-precos .section {
+  padding: 18px 26px 10px;
+}
+.ip-precos .section-intro {
+  margin-top: 10px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+/* ---------- card ---------- */
+.ip-precos .card {
+  margin-top: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  position: relative;
+}
+.ip-precos .photo-slot {
+  flex: 0 0 86px;
+  width: 86px;
+  height: 104px;
+  border-radius: 50% 50% 8px 8px / 55% 55% 8px 8px;
+  border: 1.5px dashed var(--brown-light);
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(122, 82, 48, 0.06) 0 6px,
+    transparent 6px 12px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px;
+  text-align: center;
+}
+.ip-precos .photo-slot svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.55;
+}
+.ip-precos .photo-slot span {
+  font-size: 9px;
+  line-height: 1.3;
+  color: var(--brown);
+  letter-spacing: 0.3px;
+}
+
+.ip-precos .card-body {
+  flex: 1;
+  min-width: 0;
+}
+.ip-precos .card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.ip-precos .card-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--green-deep);
+}
+.ip-precos .price {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.ip-precos .price small {
+  font-size: 12px;
+  font-weight: 500;
+}
+.ip-precos .card-meta {
+  margin-top: 2px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--brown);
+  font-weight: 500;
+}
+.ip-precos .card-desc {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+  opacity: 0.8;
+}
+.ip-precos .badge {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  background: var(--gold);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(182, 145, 58, 0.4);
+}
+
+/* ---------- gift box ---------- */
+.ip-precos .gift {
+  margin-top: 22px;
+  border: 1px dashed var(--gold);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(230, 216, 172, 0.18);
+}
+.ip-precos .gift-title {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--green-deep);
+}
+.ip-precos .gift-desc {
+  font-size: 13px;
+  margin-top: 4px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+.ip-precos .chips {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.ip-precos .chip {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: center;
+}
+.ip-precos .chip .chip-label {
+  font-size: 11px;
+  color: var(--brown);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.ip-precos .chip .chip-price {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+/* ---------- como funciona ---------- */
+.ip-precos .steps {
+  margin-top: 18px;
+}
+.ip-precos .step {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ip-precos .step:last-child {
+  border-bottom: none;
+}
+.ip-precos .step-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--gold);
+  flex: 0 0 26px;
+}
+.ip-precos .step-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  opacity: 0.85;
+  padding-top: 2px;
+}
+.ip-precos .step-text b {
+  color: var(--green-deep);
+  font-weight: 600;
+}
+
+/* ---------- footer ---------- */
+.ip-precos .folder-footer {
+  margin-top: 8px;
+  padding: 28px 26px 30px;
+  background: var(--green-deep);
+  color: #f4eede;
+  text-align: center;
+}
+.ip-precos .folder-footer .brand {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+}
+.ip-precos .folder-footer .note {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.65;
+  letter-spacing: 0.4px;
+}
+.ip-precos .contact-edit {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ip-precos .edit-pill {
+  border: 1px dashed rgba(244, 238, 222, 0.5);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 12.5px;
+  color: rgba(244, 238, 222, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.ip-precos .edit-pill svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+/* reveal */
+.ip-precos .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.ip-precos .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 360px) {
+  .ip-precos .card {
+    flex-direction: column;
+  }
+  .ip-precos .photo-slot {
+    width: 100%;
+    height: 90px;
+    border-radius: 10px;
+  }
+}

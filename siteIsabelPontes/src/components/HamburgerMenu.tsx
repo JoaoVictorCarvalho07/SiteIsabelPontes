@@ -21,6 +21,7 @@ const items: Item[] = [
   // { to: '/parceiros', label: 'Parceiros' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/contato', label: 'Contato' },
+  { to: '/precos', label: 'Evento Celta' },
 ];
 
 export function HamburgerMenu({ className }: { className?: string }) {

@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import ContactSection from './pages/ContactSection';
 import NotFound from './pages/NotFound';
 import PhotoGallery from './pages/PhotoGallery';
+import PrecosEvento from './pages/PrecosEvento';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
@@ -21,8 +22,9 @@ function App() {
         {/* <Route path="/parceiros" element={<Partners />} /> */}
         <Route path="/sobre" element={<SobreMim />} />
         <Route path="/contato" element={<ContactSection />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/galeria" element={<PhotoGallery />} />
+        <Route path="/precos" element={<PrecosEvento />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       <SpeedInsights />
