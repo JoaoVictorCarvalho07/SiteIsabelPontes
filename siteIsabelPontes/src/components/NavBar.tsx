@@ -3,16 +3,22 @@ import { Link, useLocation } from 'react-router-dom';
 import { HamburgerMenu } from './HamburgerMenu';
 import { cn } from '@/lib/utils';
 
-const DARK_LOGO_ROUTES = ['/sobre', '/contato', '/blog/', '/galeria', '/precos'];
+const DARK_LOGO_ROUTES = [
+  '/sobre',
+  '/contato',
+  '/blog/',
+  '/galeria',
+  '/precos',
+];
 
 // Rotas com fundo próprio claro — navbar sempre usa logo/texto escuros, ignorando o dark mode do sistema
-const FORCE_LIGHT_NAV_ROUTES = ['/precos'];
+const FORCE_LIGHT_NAV_ROUTES = ['/evento-celta'];
 
 const NAV_LINKS = [
   { to: '/galeria', label: 'Galeria' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/contato', label: 'Contato' },
-  { to: '/precos', label: 'Evento Celta' },
+  { to: '/evento-celta', label: 'Evento Celta' },
 ];
 
 export default function Navbar() {
