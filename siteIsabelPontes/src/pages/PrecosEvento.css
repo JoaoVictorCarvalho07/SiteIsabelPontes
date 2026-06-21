@@ -45,6 +45,13 @@
   min-height: 100vh;
 }
 
+/* No mobile o navbar fixo fica em cima do hero — empurra o conteúdo pra baixo */
+@media (max-width: 767px) {
+  .ip-precos {
+    padding-top: 88px;
+  }
+}
+
 /* ---------- shared type ---------- */
 .ip-precos .eyebrow {
   font-family: 'Jost', sans-serif;

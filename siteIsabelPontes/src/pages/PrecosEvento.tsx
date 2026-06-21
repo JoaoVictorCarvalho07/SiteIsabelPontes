@@ -39,7 +39,7 @@ export default function PrecosEvento() {
   }, []);
 
   return (
-    <div className="ip-precos">
+    <div className="ip-precos ">
       <div className="folder">
         {/* HERO */}
         <div className="hero">
